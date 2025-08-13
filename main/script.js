@@ -247,7 +247,6 @@ function initSmoothScrolling() {
 function initFloatingNavigation() {
   // Define all sections in order from top to bottom
   const sections = [
-    { id: "hero", name: "Početak", icon: "🏠" },
     { id: "about-section", name: "O nama", icon: "👥" },
     { id: "vehicles-section", name: "Vozila", icon: "🚗" },
     { id: "organizations-section", name: "Organizacije", icon: "👨‍👩‍👧‍👦" },
@@ -267,51 +266,55 @@ function initFloatingNavigation() {
   `
   document.body.appendChild(floatingNav)
 
-  // Function to find the next section below current scroll position
-  function getNextSection() {
-    const scrollTop = window.scrollY
-    const windowHeight = window.innerHeight
-    const currentPosition = scrollTop + windowHeight * 0.3 // Use 30% of viewport as reference point
+  let currentTargetIndex = 0
 
-    // Find the first section that is below our current position
-    for (let i = 0; i < sections.length; i++) {
+  // Function to find which section user is currently viewing
+  function getCurrentSection() {
+    const scrollTop = window.scrollY + 100 // Add offset for better detection
+
+    for (let i = sections.length - 1; i >= 0; i--) {
       const sectionElement = document.getElementById(sections[i].id)
-      if (sectionElement) {
-        const sectionTop = sectionElement.offsetTop
-
-        // If this section is below our current position, this is our target
-        if (sectionTop > currentPosition) {
-          return sections[i]
-        }
+      if (sectionElement && sectionElement.offsetTop <= scrollTop) {
+        return i
       }
     }
-
-    // If we're at the bottom, go back to the first section
-    return sections[0]
+    return -1 // User is above all sections (in hero)
   }
 
-  // Function to update the button text and icon
+  // Function to update the button to show next section
   function updateButton() {
-    const nextSection = getNextSection()
+    const currentSectionIndex = getCurrentSection()
+    let nextSectionIndex
+
+    // If user is above all sections or at the last section, show first section
+    if (currentSectionIndex === -1 || currentSectionIndex === sections.length - 1) {
+      nextSectionIndex = 0
+    } else {
+      // Show next section after current one
+      nextSectionIndex = currentSectionIndex + 1
+    }
+
+    const nextSection = sections[nextSectionIndex]
     const icon = floatingNav.querySelector(".floating-nav-icon")
     const text = floatingNav.querySelector(".floating-nav-text")
 
     if (icon && text && nextSection) {
       icon.textContent = nextSection.icon
       text.textContent = `Idi na ${nextSection.name}`
-      floatingNav.dataset.targetId = nextSection.id
+      currentTargetIndex = nextSectionIndex
     }
   }
 
   // Function to scroll to the target section
   function scrollToTarget() {
-    const targetId = floatingNav.dataset.targetId
-    const targetElement = document.getElementById(targetId)
+    const targetSection = sections[currentTargetIndex]
+    const targetElement = document.getElementById(targetSection.id)
 
     if (targetElement) {
-      targetElement.scrollIntoView({
+      const targetPosition = targetElement.offsetTop - 80
+      window.scrollTo({
+        top: targetPosition,
         behavior: "smooth",
-        block: "start",
       })
     }
   }
@@ -326,7 +329,7 @@ function initFloatingNavigation() {
   let scrollTimeout
   window.addEventListener("scroll", () => {
     clearTimeout(scrollTimeout)
-    scrollTimeout = setTimeout(updateButton, 50)
+    scrollTimeout = setTimeout(updateButton, 100)
   })
 
   // Initialize button
