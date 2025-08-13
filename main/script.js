@@ -63,32 +63,38 @@ const organizations = [
     image:
       "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
   },
+  {
+    name: "Owner",
+    price: "1245€",
+    image:
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+  },
 ]
 
 const admins = [
   {
-    name: "Admin",
+    name: "Helper Admin",
     price: "10€",
     image:
-      "https://cdn.discordapp.com/attachments/1405000870977994824/1405005739642060820/cooltext488698785025724.png?ex=689d4110&is=689bef90&hm=cc9cbffc595b291118494b4a63ed23f0b297af6f7785982eec48503222862620&",
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+  },
+  {
+    name: "Moderator",
+    price: "25€",
+    image:
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+  },
+  {
+    name: "Admin",
+    price: "50€",
+    image:
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
   },
   {
     name: "Super Admin",
-    price: "25€",
-    image:
-      "https://cdn.discordapp.com/attachments/1405000870977994824/1405005846248820777/cooltext488698778848147.png?ex=689d4129&is=689befa9&hm=e554c6099741b6fd501d560c9db2fb2a1404ed94391a79bc28c265ed69bd2e39&",
-  },
-  {
-    name: "Roleplay Admin",
-    price: "50€",
-    image:
-      "https://cdn.discordapp.com/attachments/1405000870977994824/1405005990948241530/cooltext488698875131462.png?ex=689d414b&is=689befcb&hm=afeed0355c92bf9362e3ae38a50ff242f8a6d89ad6adcfeeaab1ef3c971e7f82&",
-  },
-  {
-    name: "Head Admin",
     price: "100€",
     image:
-      "https://cdn.discordapp.com/attachments/1405000870977994824/1405006058749038754/cooltext488698917871966.png?ex=689d415c&is=689befdc&hm=71116c68b29401db3ae2df602dbe2bf91ad828c09fd4206369ff41143ffe5b44&",
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
   },
 ]
 
@@ -319,20 +325,134 @@ function addLoadingAnimations() {
   })
 }
 
+/* Enhanced scroll animations and interactions */
+function addAdvancedAnimations() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px",
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        // Staggered animation for cards
+        setTimeout(() => {
+          entry.target.classList.add("animate-in")
+        }, index * 100)
+        observer.unobserve(entry.target)
+      }
+    })
+  }, observerOptions)
+
+  // Enhanced card animations
+  document.querySelectorAll(".donation-card, .about-card, .gallery-item").forEach((el, index) => {
+    el.classList.add("animate-ready")
+    el.style.transitionDelay = `${index * 0.1}s`
+    observer.observe(el)
+  })
+
+  // Parallax effect for hero section
+  window.addEventListener("scroll", () => {
+    const scrolled = window.pageYOffset
+    const heroSection = document.querySelector(".hero-section")
+    if (heroSection) {
+      heroSection.style.transform = `translateY(${scrolled * 0.3}px)`
+    }
+  })
+}
+
+/* Enhanced button interactions with ripple effects */
+function addButtonEffects() {
+  document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("donation-btn") || e.target.classList.contains("discord-btn")) {
+      // Create ripple effect
+      const button = e.target
+      const rect = button.getBoundingClientRect()
+      const ripple = document.createElement("span")
+      const size = Math.max(rect.width, rect.height)
+      const x = e.clientX - rect.left - size / 2
+      const y = e.clientY - rect.top - size / 2
+
+      ripple.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        left: ${x}px;
+        top: ${y}px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 0.6s ease-out;
+        pointer-events: none;
+      `
+
+      button.style.position = "relative"
+      button.style.overflow = "hidden"
+      button.appendChild(ripple)
+
+      // Button press animation
+      button.style.transform = "scale(0.95)"
+      setTimeout(() => {
+        button.style.transform = ""
+        ripple.remove()
+      }, 150)
+    }
+  })
+
+  // Add ripple animation CSS
+  const style = document.createElement("style")
+  style.textContent = `
+    @keyframes ripple {
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+  `
+  document.head.appendChild(style)
+}
+
+/* Enhanced mouse tracking effects */
+function addMouseTrackingEffects() {
+  let mouseX = 0,
+    mouseY = 0
+
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX
+    mouseY = e.clientY
+
+    // Update CSS custom properties for mouse position
+    document.documentElement.style.setProperty("--mouse-x", mouseX + "px")
+    document.documentElement.style.setProperty("--mouse-y", mouseY + "px")
+  })
+
+  // Add subtle mouse-following glow effect
+  const glowStyle = document.createElement("style")
+  glowStyle.textContent = `
+    body::before {
+      background-image: 
+        radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(239, 68, 68, 0.06), transparent 40%),
+        radial-gradient(3px 3px at 20px 30px, rgba(239, 68, 68, 0.4), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.15), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(239, 68, 68, 0.3), transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.08), transparent),
+        radial-gradient(2px 2px at 160px 30px, rgba(239, 68, 68, 0.2), transparent),
+        radial-gradient(1px 1px at 200px 100px, rgba(239, 68, 68, 0.15), transparent);
+    }
+  `
+  document.head.appendChild(glowStyle)
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   populateContent()
   initSmoothScrolling()
   initScrollIndicators()
 
-  setTimeout(addLoadingAnimations, 100)
-
-  document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("donation-btn") || e.target.classList.contains("discord-btn")) {
-      e.target.style.transform = "scale(0.98)"
-      setTimeout(() => {
-        e.target.style.transform = ""
-      }, 100)
-    }
-  })
+  setTimeout(() => {
+    addLoadingAnimations()
+    addAdvancedAnimations()
+    addButtonEffects()
+    addMouseTrackingEffects()
+  }, 100)
 })
