@@ -243,6 +243,98 @@ function initSmoothScrolling() {
   })
 }
 
+// Function to create floating navigation functionality
+function initFloatingNavigation() {
+  // Define navigation sections in order
+  const navSections = [
+    { id: "about-section", name: "O nama", icon: "👥" },
+    { id: "vehicles-section", name: "Vozila", icon: "🚗" },
+    { id: "organizations-section", name: "Organizacije", icon: "👨‍👩‍👧‍👦" },
+    { id: "admins-section", name: "Admini", icon: "🛡️" },
+    { id: "commands-section", name: "Komande", icon: "⌨️" },
+    { id: "addons-section", name: "Dodaci", icon: "⚙️" },
+    { id: "join-section", name: "Pridruži se", icon: "🎮" },
+    { id: "gallery-section", name: "Galerija", icon: "📸" },
+  ]
+
+  let currentSectionIndex = 0
+
+  // Create floating navigation button
+  const floatingNav = document.createElement("button")
+  floatingNav.className = "floating-nav"
+  floatingNav.innerHTML = `
+    <span class="floating-nav-icon">👥</span>
+    <span class="floating-nav-text">Idi na O nama</span>
+  `
+  document.body.appendChild(floatingNav)
+
+  // Function to update button text and icon
+  function updateFloatingNav() {
+    const nextSection = navSections[currentSectionIndex]
+    const icon = floatingNav.querySelector(".floating-nav-icon")
+    const text = floatingNav.querySelector(".floating-nav-text")
+
+    icon.textContent = nextSection.icon
+    text.textContent = `Idi na ${nextSection.name}`
+  }
+
+  // Function to scroll to next section
+  function scrollToNextSection() {
+    const targetSection = document.querySelector(`#${navSections[currentSectionIndex].id}`)
+    if (targetSection) {
+      const targetPosition = targetSection.offsetTop - 80
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth",
+      })
+    }
+
+    // Move to next section (cycle through)
+    currentSectionIndex = (currentSectionIndex + 1) % navSections.length
+    updateFloatingNav()
+  }
+
+  // Add click event listener
+  floatingNav.addEventListener("click", scrollToNextSection)
+
+  // Intersection Observer to detect current section
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+          const sectionClass = Array.from(entry.target.classList).find((cls) =>
+            navSections.some((section) => section.id === cls),
+          )
+
+          if (sectionClass) {
+            const sectionIndex = navSections.findIndex((section) => section.id === sectionClass)
+            if (sectionIndex !== -1) {
+              // Set next section as the one after current
+              currentSectionIndex = (sectionIndex + 1) % navSections.length
+              updateFloatingNav()
+            }
+          }
+        }
+      })
+    },
+    {
+      threshold: 0.5,
+      rootMargin: "-10% 0px -10% 0px",
+    },
+  )
+
+  // Observe all sections
+  navSections.forEach((section) => {
+    const element = document.getElementById(section.id)
+    if (element) {
+      sectionObserver.observe(element)
+    }
+  })
+
+  // Initialize with first section
+  updateFloatingNav()
+}
+
 function initScrollIndicators() {
   // Create scroll indicator element
   const scrollIndicator = document.createElement("div")
@@ -251,26 +343,23 @@ function initScrollIndicators() {
   document.body.appendChild(scrollIndicator)
 
   const categories = [
-    { id: "vehicles-section", name: "Vozila" },
-    { id: "organizations-section", name: "Organizacije" },
-    { id: "admins-section", name: "Admini" },
-    { id: "commands-section", name: "Komande" },
-    { id: "addons-section", name: "Dodaci" },
-    { id: "join-section", name: "Pridruži se" },
-    { id: "gallery-section", name: "Galerija" },
+    { className: "about-section", name: "O nama" },
+    { className: "donations-section", name: "Donacije" },
+    { className: "join-section", name: "Pridruži se" },
+    { className: "gallery-section", name: "Galerija" },
   ]
 
   let currentCategory = ""
   let indicatorTimeout
 
   function showIndicator(categoryName) {
-    scrollIndicator.textContent = `Skrolaj do ${categoryName}`
+    scrollIndicator.textContent = `Trenutno: ${categoryName}`
     scrollIndicator.classList.add("show")
 
     clearTimeout(indicatorTimeout)
     indicatorTimeout = setTimeout(() => {
       scrollIndicator.classList.remove("show")
-    }, 3000)
+    }, 2000)
   }
 
   // Intersection Observer for category detection
@@ -278,7 +367,7 @@ function initScrollIndicators() {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
-          const category = categories.find((cat) => cat.id === entry.target.id)
+          const category = categories.find((cat) => entry.target.classList.contains(cat.className))
           if (category && currentCategory !== category.name) {
             currentCategory = category.name
             showIndicator(category.name)
@@ -294,7 +383,7 @@ function initScrollIndicators() {
 
   // Observe all category sections
   categories.forEach((category) => {
-    const element = document.getElementById(category.id)
+    const element = document.querySelector(`.${category.className}`)
     if (element) {
       categoryObserver.observe(element)
     }
@@ -332,7 +421,8 @@ function addLoadingAnimations() {
 document.addEventListener("DOMContentLoaded", () => {
   populateContent()
   initSmoothScrolling()
-  initScrollIndicators() // Added scroll indicators initialization
+  initScrollIndicators()
+  initFloatingNavigation() // Added floating navigation initialization
 
   setTimeout(addLoadingAnimations, 100)
 
