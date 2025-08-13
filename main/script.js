@@ -287,48 +287,40 @@ function initFloatingNavigation() {
         top: targetPosition,
         behavior: "smooth",
       })
-    }
 
-    // Move to next section (cycle through)
-    currentSectionIndex = (currentSectionIndex + 1) % navSections.length
-    updateFloatingNav()
+      // Move to next section after scrolling
+      setTimeout(() => {
+        currentSectionIndex = (currentSectionIndex + 1) % navSections.length
+        updateFloatingNav()
+      }, 500)
+    }
   }
 
   // Add click event listener
   floatingNav.addEventListener("click", scrollToNextSection)
 
-  // Intersection Observer to detect current section
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-          const sectionClass = Array.from(entry.target.classList).find((cls) =>
-            navSections.some((section) => section.id === cls),
-          )
+  // Improved scroll detection
+  function detectCurrentSection() {
+    const scrollPosition = window.scrollY + 200
 
-          if (sectionClass) {
-            const sectionIndex = navSections.findIndex((section) => section.id === sectionClass)
-            if (sectionIndex !== -1) {
-              // Set next section as the one after current
-              currentSectionIndex = (sectionIndex + 1) % navSections.length
-              updateFloatingNav()
-            }
-          }
+    for (let i = navSections.length - 1; i >= 0; i--) {
+      const section = document.getElementById(navSections[i].id)
+      if (section && section.offsetTop <= scrollPosition) {
+        const nextIndex = (i + 1) % navSections.length
+        if (currentSectionIndex !== nextIndex) {
+          currentSectionIndex = nextIndex
+          updateFloatingNav()
         }
-      })
-    },
-    {
-      threshold: 0.5,
-      rootMargin: "-10% 0px -10% 0px",
-    },
-  )
-
-  // Observe all sections
-  navSections.forEach((section) => {
-    const element = document.getElementById(section.id)
-    if (element) {
-      sectionObserver.observe(element)
+        break
+      }
     }
+  }
+
+  // Listen to scroll events with throttling
+  let scrollTimeout
+  window.addEventListener("scroll", () => {
+    clearTimeout(scrollTimeout)
+    scrollTimeout = setTimeout(detectCurrentSection, 100)
   })
 
   // Initialize with first section
