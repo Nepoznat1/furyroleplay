@@ -71,7 +71,89 @@ const organizations = [
   },
 ]
 
+const admins = [
+  {
+    name: "Helper Admin",
+    price: "10€",
+    image:
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+  },
+  {
+    name: "Moderator",
+    price: "25€",
+    image:
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+  },
+  {
+    name: "Admin",
+    price: "50€",
+    image:
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+  },
+  {
+    name: "Super Admin",
+    price: "100€",
+    image:
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+  },
+]
+
+const commands = [
+  {
+    name: "VIP Komande",
+    price: "15€",
+    image:
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+  },
+  {
+    name: "Premium Komande",
+    price: "30€",
+    image:
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+  },
+  {
+    name: "Elite Komande",
+    price: "50€",
+    image:
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+  },
+  {
+    name: "Ultimate Komande",
+    price: "75€",
+    image:
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+  },
+]
+
+const addons = [
+  {
+    name: "Skin Pack",
+    price: "5€",
+    image:
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+  },
+  {
+    name: "Weapon Pack",
+    price: "12€",
+    image:
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+  },
+  {
+    name: "Map Pack",
+    price: "20€",
+    image:
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+  },
+  {
+    name: "Complete Pack",
+    price: "35€",
+    image:
+      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+  },
+]
+
 const gameImages = [
+  "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
   "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
   "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
   "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
@@ -118,6 +200,24 @@ function populateContent() {
   const organizationsGrid = document.getElementById("organizations-grid")
   if (organizationsGrid) {
     organizationsGrid.innerHTML = organizations.map((org) => createDonationCard(org, "organization")).join("")
+  }
+
+  // Populate admins
+  const adminsGrid = document.getElementById("admins-grid")
+  if (adminsGrid) {
+    adminsGrid.innerHTML = admins.map((admin) => createDonationCard(admin, "admin")).join("")
+  }
+
+  // Populate commands
+  const commandsGrid = document.getElementById("commands-grid")
+  if (commandsGrid) {
+    commandsGrid.innerHTML = commands.map((command) => createDonationCard(command, "command")).join("")
+  }
+
+  // Populate addons
+  const addonsGrid = document.getElementById("addons-grid")
+  if (addonsGrid) {
+    addonsGrid.innerHTML = addons.map((addon) => createDonationCard(addon, "addon")).join("")
   }
 
   // Populate gallery
