@@ -166,22 +166,124 @@ body {
 }
 
 .donation-category {
-  margin-bottom: 64px;
+  margin-bottom: 80px;
+  position: relative;
 }
 
 .category-title {
   font-size: 24px;
   font-weight: 600;
-  margin-bottom: 32px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  position: relative;
+  padding: 16px 0;
 }
 
-.category-icon {
-  color: #ef4444;
+.category-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ef4444, #f87171);
+  transition: width 0.6s ease;
+}
+
+.category-title.animate-in::after {
+  width: 120px;
+}
+
+.donation-category:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.3), transparent);
+}
+
+.category-divider {
+  position: relative;
+  margin: 48px 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ef4444, transparent);
+  overflow: hidden;
+}
+
+.category-divider::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #ffffff, transparent);
+  animation: divider-shine 3s infinite;
+}
+
+@keyframes divider-shine {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.scroll-indicator {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  background: rgba(220, 38, 38, 0.9);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  z-index: 1000;
+}
+
+.scroll-indicator.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-indicator::before {
+  content: "↓";
+  margin-right: 8px;
+  animation: bounce-arrow 2s infinite;
+}
+
+@keyframes bounce-arrow {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
 }
 
 .donation-grid {
