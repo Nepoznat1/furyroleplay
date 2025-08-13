@@ -258,8 +258,6 @@ function initFloatingNavigation() {
     { id: "gallery-section", name: "Galerija", icon: "📸" },
   ]
 
-  const currentSectionIndex = 0
-
   // Create floating navigation button
   const floatingNav = document.createElement("button")
   floatingNav.className = "floating-nav"
@@ -269,34 +267,54 @@ function initFloatingNavigation() {
   `
   document.body.appendChild(floatingNav)
 
+  let currentSectionIndex = 0
+
   // Function to get current section based on scroll position
   function getCurrentSectionIndex() {
-    const scrollPosition = window.scrollY + 150
+    const scrollPosition = window.scrollY + window.innerHeight / 2
 
-    // Check each section from bottom to top
-    for (let i = navSections.length - 1; i >= 0; i--) {
+    for (let i = 0; i < navSections.length; i++) {
       const section = document.getElementById(navSections[i].id)
-      if (section && section.offsetTop <= scrollPosition) {
-        return i
+      if (section) {
+        const sectionTop = section.offsetTop
+        const sectionBottom = sectionTop + section.offsetHeight
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+          return i
+        }
       }
     }
-    return 0 // Default to first section
+
+    // If we're at the very bottom, return last section
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 100) {
+      return navSections.length - 1
+    }
+
+    return 0
   }
 
   // Function to update button to show NEXT section
   function updateFloatingNav() {
-    const currentIndex = getCurrentSectionIndex()
-    const nextIndex = (currentIndex + 1) % navSections.length
+    const detectedIndex = getCurrentSectionIndex()
+
+    // Only update if we've actually moved to a different section
+    if (detectedIndex !== currentSectionIndex) {
+      currentSectionIndex = detectedIndex
+    }
+
+    const nextIndex = (currentSectionIndex + 1) % navSections.length
     const nextSection = navSections[nextIndex]
 
     const icon = floatingNav.querySelector(".floating-nav-icon")
     const text = floatingNav.querySelector(".floating-nav-text")
 
-    icon.textContent = nextSection.icon
-    text.textContent = `Idi na ${nextSection.name}`
+    if (icon && text) {
+      icon.textContent = nextSection.icon
+      text.textContent = `Idi na ${nextSection.name}`
 
-    // Store the next section index for clicking
-    floatingNav.dataset.nextSection = nextIndex
+      // Store the next section index for clicking
+      floatingNav.dataset.nextSection = nextIndex.toString()
+    }
   }
 
   // Function to scroll to the next section
@@ -305,22 +323,30 @@ function initFloatingNavigation() {
     const targetSection = document.getElementById(navSections[nextIndex].id)
 
     if (targetSection) {
-      const targetPosition = targetSection.offsetTop - 80
-      window.scrollTo({
-        top: targetPosition,
+      targetSection.scrollIntoView({
         behavior: "smooth",
+        block: "start",
       })
+
+      // Update current section index after scrolling
+      setTimeout(() => {
+        currentSectionIndex = nextIndex
+        updateFloatingNav()
+      }, 1000)
     }
   }
 
   // Add click event listener
-  floatingNav.addEventListener("click", scrollToNextSection)
+  floatingNav.addEventListener("click", (e) => {
+    e.preventDefault()
+    scrollToNextSection()
+  })
 
   // Scroll detection with throttling
   let scrollTimeout
   window.addEventListener("scroll", () => {
     clearTimeout(scrollTimeout)
-    scrollTimeout = setTimeout(updateFloatingNav, 50)
+    scrollTimeout = setTimeout(updateFloatingNav, 100)
   })
 
   // Initialize
