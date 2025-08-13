@@ -54,10 +54,12 @@ body {
   height: 16px;
 }
 
-/* Hero Section */
 .hero-section {
   padding: 64px 0;
   text-align: center;
+
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .hero-title {
