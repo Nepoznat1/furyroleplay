@@ -245,8 +245,8 @@ function initSmoothScrolling() {
 
 // Function to create floating navigation functionality
 function initFloatingNavigation() {
-  // Define navigation sections in order
-  const navSections = [
+  // Define all sections in order from top to bottom
+  const sections = [
     { id: "hero", name: "Početak", icon: "🏠" },
     { id: "about-section", name: "O nama", icon: "👥" },
     { id: "vehicles-section", name: "Vozila", icon: "🚗" },
@@ -267,90 +267,70 @@ function initFloatingNavigation() {
   `
   document.body.appendChild(floatingNav)
 
-  let currentSectionIndex = 0
+  // Function to find the next section below current scroll position
+  function getNextSection() {
+    const scrollTop = window.scrollY
+    const windowHeight = window.innerHeight
+    const currentPosition = scrollTop + windowHeight * 0.3 // Use 30% of viewport as reference point
 
-  // Function to get current section based on scroll position
-  function getCurrentSectionIndex() {
-    const scrollPosition = window.scrollY + window.innerHeight / 2
+    // Find the first section that is below our current position
+    for (let i = 0; i < sections.length; i++) {
+      const sectionElement = document.getElementById(sections[i].id)
+      if (sectionElement) {
+        const sectionTop = sectionElement.offsetTop
 
-    for (let i = 0; i < navSections.length; i++) {
-      const section = document.getElementById(navSections[i].id)
-      if (section) {
-        const sectionTop = section.offsetTop
-        const sectionBottom = sectionTop + section.offsetHeight
-
-        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-          return i
+        // If this section is below our current position, this is our target
+        if (sectionTop > currentPosition) {
+          return sections[i]
         }
       }
     }
 
-    // If we're at the very bottom, return last section
-    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 100) {
-      return navSections.length - 1
-    }
-
-    return 0
+    // If we're at the bottom, go back to the first section
+    return sections[0]
   }
 
-  // Function to update button to show NEXT section
-  function updateFloatingNav() {
-    const detectedIndex = getCurrentSectionIndex()
-
-    // Only update if we've actually moved to a different section
-    if (detectedIndex !== currentSectionIndex) {
-      currentSectionIndex = detectedIndex
-    }
-
-    const nextIndex = (currentSectionIndex + 1) % navSections.length
-    const nextSection = navSections[nextIndex]
-
+  // Function to update the button text and icon
+  function updateButton() {
+    const nextSection = getNextSection()
     const icon = floatingNav.querySelector(".floating-nav-icon")
     const text = floatingNav.querySelector(".floating-nav-text")
 
-    if (icon && text) {
+    if (icon && text && nextSection) {
       icon.textContent = nextSection.icon
       text.textContent = `Idi na ${nextSection.name}`
-
-      // Store the next section index for clicking
-      floatingNav.dataset.nextSection = nextIndex.toString()
+      floatingNav.dataset.targetId = nextSection.id
     }
   }
 
-  // Function to scroll to the next section
-  function scrollToNextSection() {
-    const nextIndex = Number.parseInt(floatingNav.dataset.nextSection) || 0
-    const targetSection = document.getElementById(navSections[nextIndex].id)
+  // Function to scroll to the target section
+  function scrollToTarget() {
+    const targetId = floatingNav.dataset.targetId
+    const targetElement = document.getElementById(targetId)
 
-    if (targetSection) {
-      targetSection.scrollIntoView({
+    if (targetElement) {
+      targetElement.scrollIntoView({
         behavior: "smooth",
         block: "start",
       })
-
-      // Update current section index after scrolling
-      setTimeout(() => {
-        currentSectionIndex = nextIndex
-        updateFloatingNav()
-      }, 1000)
     }
   }
 
   // Add click event listener
   floatingNav.addEventListener("click", (e) => {
     e.preventDefault()
-    scrollToNextSection()
+    scrollToTarget()
   })
 
-  // Scroll detection with throttling
+  // Add scroll event listener with throttling
   let scrollTimeout
   window.addEventListener("scroll", () => {
     clearTimeout(scrollTimeout)
-    scrollTimeout = setTimeout(updateFloatingNav, 100)
+    scrollTimeout = setTimeout(updateButton, 50)
   })
 
-  // Initialize
-  updateFloatingNav()
+  // Initialize button
+  updateButton()
 }
 
 function initScrollIndicators() {
