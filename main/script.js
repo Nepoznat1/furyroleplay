@@ -70,25 +70,25 @@ const admins = [
     name: "Admin",
     price: "10€",
     image:
-      "https://cdn.discordapp.com/attachments/1405000870977994824/1405004973661618227/1.png?ex=689d4059&is=689beed9&hm=f11a04390ca5cb0c789087a15697c0872d766d3510b5bb1cf664c86d2af3b4fc&",
+      "https://cdn.discordapp.com/attachments/1405000870977994824/1405005739642060820/cooltext488698785025724.png?ex=689d4110&is=689bef90&hm=cc9cbffc595b291118494b4a63ed23f0b297af6f7785982eec48503222862620&",
   },
   {
     name: "Super Admin",
     price: "25€",
     image:
-      "https://cdn.discordapp.com/attachments/1405000870977994824/1405002141801775226/cooltext488697710813991.png?ex=689d3db6&is=689bec36&hm=815e521e65dbfa4190a0f856a0e742f502ba89786e035426f7b3060e0986466e&",
+      "https://cdn.discordapp.com/attachments/1405000870977994824/1405005846248820777/cooltext488698778848147.png?ex=689d4129&is=689befa9&hm=e554c6099741b6fd501d560c9db2fb2a1404ed94391a79bc28c265ed69bd2e39&",
   },
   {
     name: "Roleplay Admin",
     price: "50€",
     image:
-      "https://cdn.discordapp.com/attachments/1405000870977994824/1405002264250159265/cooltext488697725763152.png?ex=689d3dd3&is=689bec53&hm=bbb6f26da31a338ea08edb6a62a40ee54dccc3779b7eff48cf69b748d299b789&",
+      "https://cdn.discordapp.com/attachments/1405000870977994824/1405005990948241530/cooltext488698875131462.png?ex=689d414b&is=689befcb&hm=afeed0355c92bf9362e3ae38a50ff242f8a6d89ad6adcfeeaab1ef3c971e7f82&",
   },
   {
     name: "Head Admin",
     price: "100€",
     image:
-      "https://cdn.discordapp.com/attachments/1405000870977994824/1405002278955515944/cooltext488697737176220.png?ex=689d3dd6&is=689bec56&hm=cfeeca70cd92244564d3042a2ea4d213ba78e69100d659efa1b3b5b7e57d2c5d&",
+      "https://cdn.discordapp.com/attachments/1405000870977994824/1405006058749038754/cooltext488698917871966.png?ex=689d415c&is=689befdc&hm=71116c68b29401db3ae2df602dbe2bf91ad828c09fd4206369ff41143ffe5b44&",
   },
 ]
 
