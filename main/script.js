@@ -243,121 +243,15 @@ function initSmoothScrolling() {
   })
 }
 
-function initScrollIndicators() {
-  // Create scroll indicator element
-  const scrollIndicator = document.createElement("div")
-  scrollIndicator.className = "scroll-indicator"
-  scrollIndicator.id = "scroll-indicator"
-  document.body.appendChild(scrollIndicator)
-
-  const categories = [
-    { className: "about-section", name: "O nama" },
-    { className: "donations-section", name: "Donacije" },
-    { className: "join-section", name: "Pridruži se" },
-    { className: "gallery-section", name: "Galerija" },
-  ]
-
-  let currentCategory = ""
-  let indicatorTimeout
-
-  function showIndicator(categoryName) {
-    scrollIndicator.textContent = `Trenutno: ${categoryName}`
-    scrollIndicator.classList.add("show")
-
-    clearTimeout(indicatorTimeout)
-    indicatorTimeout = setTimeout(() => {
-      scrollIndicator.classList.remove("show")
-    }, 2000)
-  }
-
-  // Intersection Observer for category detection
-  const categoryObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
-          const category = categories.find((cat) => entry.target.classList.contains(cat.className))
-          if (category && currentCategory !== category.name) {
-            currentCategory = category.name
-            showIndicator(category.name)
-          }
-        }
-      })
-    },
-    {
-      threshold: [0.3],
-      rootMargin: "-20% 0px -20% 0px",
-    },
-  )
-
-  // Observe all category sections
-  categories.forEach((category) => {
-    const element = document.querySelector(`.${category.className}`)
-    if (element) {
-      categoryObserver.observe(element)
-    }
-  })
-}
-
-function addLoadingAnimations() {
-  const observerOptions = {
-    threshold: 0.15,
-    rootMargin: "0px 0px -30px 0px",
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("animate-in")
-        observer.unobserve(entry.target)
-      }
-    })
-  }, observerOptions)
-
-  // Observe donation cards, about cards, and gallery items
+function showAllContent() {
+  // Make all elements visible immediately without scroll triggers
   document.querySelectorAll(".donation-card, .about-card, .gallery-item").forEach((el) => {
-    el.classList.add("animate-ready")
-    observer.observe(el)
+    el.classList.add("animate-in")
   })
 
-  // Observe category titles for underline animation
+  // Show category titles immediately
   document.querySelectorAll(".category-title").forEach((el) => {
-    observer.observe(el)
-  })
-}
-
-/* Enhanced scroll animations and interactions */
-function addAdvancedAnimations() {
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-      if (entry.isIntersecting) {
-        // Staggered animation for cards
-        setTimeout(() => {
-          entry.target.classList.add("animate-in")
-        }, index * 100)
-        observer.unobserve(entry.target)
-      }
-    })
-  }, observerOptions)
-
-  // Enhanced card animations
-  document.querySelectorAll(".donation-card, .about-card, .gallery-item").forEach((el, index) => {
-    el.classList.add("animate-ready")
-    el.style.transitionDelay = `${index * 0.1}s`
-    observer.observe(el)
-  })
-
-  // Parallax effect for hero section
-  window.addEventListener("scroll", () => {
-    const scrolled = window.pageYOffset
-    const heroSection = document.querySelector(".hero-section")
-    if (heroSection) {
-      heroSection.style.transform = `translateY(${scrolled * 0.3}px)`
-    }
+    el.classList.add("animate-in")
   })
 }
 
@@ -412,47 +306,13 @@ function addButtonEffects() {
   document.head.appendChild(style)
 }
 
-/* Enhanced mouse tracking effects */
-function addMouseTrackingEffects() {
-  let mouseX = 0,
-    mouseY = 0
-
-  document.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX
-    mouseY = e.clientY
-
-    // Update CSS custom properties for mouse position
-    document.documentElement.style.setProperty("--mouse-x", mouseX + "px")
-    document.documentElement.style.setProperty("--mouse-y", mouseY + "px")
-  })
-
-  // Add subtle mouse-following glow effect
-  const glowStyle = document.createElement("style")
-  glowStyle.textContent = `
-    body::before {
-      background-image: 
-        radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(239, 68, 68, 0.06), transparent 40%),
-        radial-gradient(3px 3px at 20px 30px, rgba(239, 68, 68, 0.4), transparent),
-        radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.15), transparent),
-        radial-gradient(1px 1px at 90px 40px, rgba(239, 68, 68, 0.3), transparent),
-        radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.08), transparent),
-        radial-gradient(2px 2px at 160px 30px, rgba(239, 68, 68, 0.2), transparent),
-        radial-gradient(1px 1px at 200px 100px, rgba(239, 68, 68, 0.15), transparent);
-    }
-  `
-  document.head.appendChild(glowStyle)
-}
-
 // Initialize everything when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   populateContent()
   initSmoothScrolling()
-  initScrollIndicators()
 
   setTimeout(() => {
-    addLoadingAnimations()
-    addAdvancedAnimations()
+    showAllContent()
     addButtonEffects()
-    addMouseTrackingEffects()
   }, 100)
 })
