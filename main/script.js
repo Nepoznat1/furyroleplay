@@ -70,7 +70,7 @@ const admins = [
     name: "Admin",
     price: "10€",
     image:
-      "https://cdn.discordapp.com/attachments/1405000870977994824/1405002071664623726/cooltext488697671315503.png?ex=689d3da5&is=689bec25&hm=88608ee66502825c2aaf613537862f8081025c4235f66e1b521adb45c890c88d&",
+      "https://cdn.discordapp.com/attachments/1405000870977994824/1405004973661618227/1.png?ex=689d4059&is=689beed9&hm=f11a04390ca5cb0c789087a15697c0872d766d3510b5bb1cf664c86d2af3b4fc&",
   },
   {
     name: "Super Admin",
