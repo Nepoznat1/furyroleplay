@@ -132,11 +132,19 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 })
 
-// Add parallax effect to hero section
+// Improved scroll handler with requestAnimationFrame for parallax
+let ticking = false;
+
 window.addEventListener("scroll", () => {
-  const scrolled = window.pageYOffset
-  const heroSection = document.querySelector(".hero-section")
-  if (heroSection) {
-    heroSection.style.transform = `translateY(${scrolled * 0.5}px)`
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      const scrolled = window.pageYOffset
+      const heroSection = document.querySelector(".hero-section")
+      if (heroSection) {
+        heroSection.style.transform = `translateY(${scrolled * 0.5}px)`
+      }
+      ticking = false;
+    });
+    ticking = true;
   }
-})
+});
