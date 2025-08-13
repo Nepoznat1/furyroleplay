@@ -1,5 +1,18 @@
 /* Added floating elements, enhanced card animations, and more visual effects */
 /* Optimized animations and added new hero title animation */
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #2d2d2d;
+  --bg-accent: #404040;
+  --red-primary: #ff0000;
+  --red-secondary: #cc0000;
+  --red-dark: #990000;
+  --text-primary: #ffffff;
+  --text-secondary: #e5e5e5;
+  --text-muted: #cccccc;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,14 +21,45 @@
 
 body {
   font-family: "Inter", sans-serif;
-  background: linear-gradient(135deg, #000000 0%, #0a0a0a 25%, #000000 50%, #0a0a0a 75%, #000000 100%);
-  color: #ffffff;
+  background: var(--bg-primary);
+  background-image: radial-gradient(circle at 25% 25%, rgba(255, 0, 0, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(255, 0, 0, 0.08) 0%, transparent 40%),
+    linear-gradient(45deg, rgba(255, 0, 0, 0.03) 0%, transparent 30%, rgba(255, 0, 0, 0.05) 70%, transparent 100%),
+    conic-gradient(
+      from 0deg at 50% 50%,
+      rgba(255, 0, 0, 0.02) 0deg,
+      transparent 60deg,
+      rgba(255, 0, 0, 0.04) 120deg,
+      transparent 180deg,
+      rgba(255, 0, 0, 0.03) 240deg,
+      transparent 300deg
+    );
+  background-size: 800px 800px, 600px 600px, 400px 400px, 1000px 1000px;
+  background-position: 0% 0%, 100% 100%, 50% 50%, center;
+  animation: backgroundFlow 30s ease-in-out infinite;
+  color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
   overflow-x: hidden;
+}
+
+@keyframes backgroundFlow {
+  0%,
+  100% {
+    background-position: 0% 0%, 100% 100%, 50% 50%, center;
+  }
+  25% {
+    background-position: 100% 0%, 0% 100%, 25% 75%, 25% 25%;
+  }
+  50% {
+    background-position: 100% 100%, 0% 0%, 75% 25%, 75% 75%;
+  }
+  75% {
+    background-position: 0% 100%, 100% 0%, 50% 50%, 50% 50%;
+  }
 }
 
 /* Enhanced background with floating geometric shapes */
@@ -26,14 +70,14 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(2px 2px at 20px 30px, rgba(239, 68, 68, 0.6), transparent),
-    radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.3), transparent),
-    radial-gradient(1px 1px at 90px 40px, rgba(239, 68, 68, 0.4), transparent),
-    radial-gradient(3px 3px at 160px 120px, rgba(255, 68, 68, 0.3), transparent),
-    radial-gradient(2px 2px at 200px 50px, rgba(255, 255, 255, 0.2), transparent);
+  background-image: radial-gradient(2px 2px at 20px 30px, rgba(239, 68, 68, 0.2), transparent),
+    radial-gradient(1px 1px at 40px 70px, rgba(127, 29, 29, 0.25), transparent),
+    radial-gradient(3px 3px at 90px 40px, rgba(220, 38, 38, 0.15), transparent),
+    radial-gradient(1px 1px at 150px 120px, rgba(255, 0, 0, 0.1), transparent),
+    radial-gradient(2px 2px at 200px 80px, rgba(239, 68, 68, 0.08), transparent);
   background-repeat: repeat;
-  background-size: 300px 150px;
-  animation: particles-float 20s linear infinite;
+  background-size: 400px 200px, 300px 300px, 500px 250px, 350px 400px, 450px 300px;
+  animation: particles-float 25s linear infinite;
   z-index: -2;
   pointer-events: none;
   will-change: transform;
@@ -46,12 +90,13 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, transparent 30%, rgba(239, 68, 68, 0.03) 50%, transparent 70%),
-    linear-gradient(-45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%),
-    linear-gradient(135deg, transparent 40%, rgba(239, 68, 68, 0.02) 60%, transparent 80%);
-  animation: diagonal-sweep 25s ease-in-out infinite;
+  background-image: linear-gradient(45deg, transparent 40%, rgba(255, 0, 0, 0.02) 50%, transparent 60%),
+    linear-gradient(-45deg, transparent 30%, rgba(255, 0, 0, 0.03) 50%, transparent 70%);
+  background-size: 200px 200px, 300px 300px;
+  animation: particles-float 35s linear infinite reverse;
   z-index: -1;
   pointer-events: none;
+  opacity: 0.6;
 }
 
 @keyframes particles-float {
@@ -97,6 +142,18 @@ body::after {
   }
 }
 
+@keyframes floatingParticles {
+  0% {
+    background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -105,13 +162,15 @@ body::after {
 
 /* Enhanced Discord Banner with wave animation */
 .discord-banner {
-  background: linear-gradient(45deg, #dc2626, #ef4444, #dc2626);
-  background-size: 200% 200%;
-  animation: gradient-wave 4s ease-in-out infinite;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
   padding: 16px 24px;
   text-align: center;
   position: relative;
   overflow: hidden;
+  box-shadow: inset 8px 8px 16px var(--bg-primary), inset -8px -8px 16px var(--bg-accent);
+  border-radius: 20px;
+  margin: 20px;
+  border: 1px solid rgba(255, 0, 0, 0.1);
 }
 
 .discord-banner::before {
@@ -121,7 +180,7 @@ body::after {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
   animation: banner-shine 3s ease-in-out infinite;
 }
 
@@ -151,30 +210,22 @@ body::after {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 12px;
-  animation: text-glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes text-glow {
-  from {
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-  }
-  to {
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-  }
+  color: var(--text-primary);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8), -1px -1px 2px rgba(127, 29, 29, 0.4);
 }
 
 .discord-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #dc2626, #ef4444);
-  color: white;
+  background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+  color: var(--red-primary);
   font-weight: 700;
   padding: 12px 32px;
   text-decoration: none;
-  border-radius: 8px;
-  border: 2px solid #000000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  box-shadow: 8px 8px 16px var(--bg-primary), -8px -8px 16px var(--bg-accent);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -187,14 +238,13 @@ body::after {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
   transition: left 0.5s ease;
 }
 
 .discord-btn:hover {
-  background: linear-gradient(135deg, #b91c1c, #dc2626);
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 4px 4px 8px var(--bg-primary), inset -4px -4px 8px var(--bg-accent); /* Dark neumorphic hover effect */
+  transform: translateY(2px); /* Dark neumorphic hover effect */
 }
 
 .discord-btn:hover::before {
@@ -223,7 +273,10 @@ body::after {
   text-align: center;
   position: relative;
   overflow: hidden;
-  background: radial-gradient(ellipse at center, rgba(239, 68, 68, 0.15) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(239, 68, 68, 0.25) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(255, 0, 0, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(239, 68, 68, 0.12) 0%, transparent 40%),
+    linear-gradient(135deg, rgba(255, 0, 0, 0.05) 0%, transparent 50%);
 }
 
 .hero-section::before {
@@ -303,13 +356,12 @@ body::after {
   margin-bottom: 32px;
   position: relative;
   letter-spacing: -0.02em;
-  background: linear-gradient(45deg, #ff0000, #ffffff, #ff4444, #ffffff, #ff0000);
-  background-size: 300% 300%;
+  color: var(--text-primary);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), -2px -2px 4px rgba(127, 29, 29, 0.6);
+  background: linear-gradient(45deg, var(--red-primary), var(--red-secondary));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: neon-glow 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.6));
 }
 
 /* Enhanced neon glow animation */
@@ -339,10 +391,11 @@ body::after {
 
 .hero-description {
   font-size: 20px;
-  color: #d1d5db;
+  color: var(--text-secondary);
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.7;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
   animation: fade-in-up 1s ease-out 0.5s both;
 }
 
@@ -359,10 +412,14 @@ body::after {
 
 /* Enhanced section styling with animated backgrounds */
 .about-section {
-  background: linear-gradient(135deg, #111827 0%, #0f172a 100%);
-  padding: 64px 0;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 50%, var(--bg-secondary) 100%);
+  padding: 64px 20px;
   position: relative;
   overflow: hidden;
+  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.8), -20px -20px 40px rgba(64, 64, 64, 0.1);
+  border-radius: 20px;
+  margin: 40px 20px;
+  border: 1px solid rgba(255, 0, 0, 0.1);
 }
 
 .about-section::before {
@@ -372,19 +429,9 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 20% 80%, rgba(239, 68, 68, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
-  animation: section-glow 10s ease-in-out infinite;
-}
-
-@keyframes section-glow {
-  0%,
-  100% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 1;
-  }
+  background: radial-gradient(circle at 20% 80%, rgba(255, 0, 0, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 0, 0, 0.05) 0%, transparent 50%);
+  border-radius: 20px;
 }
 
 .section-title {
@@ -392,14 +439,12 @@ body::after {
   font-weight: 700;
   text-align: center;
   margin-bottom: 48px;
-  color: #ef4444;
+  color: var(--red-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  text-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
-  position: relative;
-  animation: title-entrance 0.8s ease-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), -2px -2px 4px rgba(127, 29, 29, 0.6);
 }
 
 @keyframes title-entrance {
@@ -421,7 +466,7 @@ body::after {
   transform: translateX(-50%);
   width: 60px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #ef4444, transparent);
+  background: linear-gradient(90deg, transparent, var(--red-primary), transparent);
   animation: pulse-line 2s ease-in-out infinite;
 }
 
@@ -438,7 +483,7 @@ body::after {
 }
 
 .section-icon {
-  color: #ef4444;
+  color: var(--red-primary);
   animation: icon-pulse 2s ease-in-out infinite;
 }
 
@@ -480,11 +525,11 @@ body::after {
 .team-category-title {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #ef4444;
+  color: var(--red-primary);
   margin-bottom: 32px;
   text-align: center;
   position: relative;
-  text-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+  text-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
 }
 
 .team-category-title::after {
@@ -495,7 +540,7 @@ body::after {
   transform: translateX(-50%);
   width: 40px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #ef4444, transparent);
+  background: linear-gradient(90deg, transparent, var(--red-primary), transparent);
   animation: pulse-line 2s ease-in-out infinite;
 }
 
@@ -513,17 +558,15 @@ body::after {
 }
 
 .team-member {
-  background: linear-gradient(145deg, #1f2937, #111827);
-  border: 2px solid #374151;
-  border-radius: 16px;
-  padding: 32px 24px;
+  background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-accent) 100%);
+  border: 1px solid rgba(255, 0, 0, 0.1);
+  box-shadow: 14px 14px 28px rgba(0, 0, 0, 0.8), -14px -14px 28px rgba(64, 64, 64, 0.1);
+  border-radius: 15px;
+  padding: 25px;
   text-align: center;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  animation: team-card-entrance 0.6s ease-out;
-  width: 250px;
-  flex-shrink: 0;
 }
 
 .team-member:nth-child(2) {
@@ -554,14 +597,14 @@ body::after {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.05), transparent);
   transition: left 0.6s ease;
 }
 
 .team-member:hover {
-  border-color: #ef4444;
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(239, 68, 68, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 14px 14px 28px rgba(0, 0, 0, 0.9), -14px -14px 28px rgba(64, 64, 64, 0.15), 0 0 20px rgba(255, 0, 0, 0.1);
+  border-color: rgba(255, 0, 0, 0.2);
 }
 
 .team-member:hover::before {
@@ -576,15 +619,15 @@ body::after {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  border: 3px solid #ef4444;
+  border: none;
   object-fit: cover;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 16px rgba(239, 68, 68, 0.3);
+  box-shadow: 8px 8px 16px var(--bg-primary), -8px -8px 16px var(--bg-accent);
 }
 
 .team-member:hover .member-avatar {
-  transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 12px 24px rgba(239, 68, 68, 0.4);
+  transform: scale(1.1);
+  box-shadow: inset 4px 4px 8px var(--bg-primary), inset -4px -4px 8px var(--bg-accent);
 }
 
 .member-info {
@@ -597,7 +640,7 @@ body::after {
 .member-name {
   font-size: 24px;
   font-weight: 700;
-  color: white;
+  color: var(--text-primary);
   margin: 0;
   transition: color 0.3s ease;
 }
@@ -608,29 +651,26 @@ body::after {
 
 .member-role {
   font-size: 16px;
-  font-weight: 500;
-  color: #ef4444;
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  color: var(--red-primary);
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .member-discord {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(88, 101, 242, 0.1);
+  background: var(--bg-secondary);
   padding: 8px 16px;
-  border-radius: 20px;
-  border: 1px solid rgba(88, 101, 242, 0.3);
+  border-radius: 16px;
+  border: none;
+  box-shadow: inset 4px 4px 8px var(--bg-primary), inset -4px -4px 8px var(--bg-accent); /* Dark neumorphic shadows */
   transition: all 0.3s ease;
-  margin-top: 8px;
 }
 
 .member-discord:hover {
-  background: rgba(88, 101, 242, 0.2);
-  border-color: rgba(88, 101, 242, 0.5);
-  transform: scale(1.05);
+  box-shadow: 4px 4px 8px var(--bg-primary), -4px -4px 8px var(--bg-accent); /* Dark neumorphic hover effect */
+  transform: translateY(-2px); /* Dark neumorphic hover effect */
 }
 
 .discord-icon {
@@ -643,7 +683,7 @@ body::after {
 }
 
 .discord-username {
-  color: #d1d5db;
+  color: var(--text-secondary); /* Neumorphic team member cards with soft raised effect */
   font-size: 14px;
   font-weight: 500;
 }
@@ -686,14 +726,14 @@ body::after {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
   transition: left 0.6s ease;
 }
 
 .about-card:hover {
-  border-color: #ef4444;
+  border-color: var(--red-primary);
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(239, 68, 68, 0.2);
+  box-shadow: 0 20px 40px rgba(255, 0, 0, 0.2);
 }
 
 .about-card:hover::before {
@@ -701,7 +741,7 @@ body::after {
 }
 
 .about-icon {
-  color: #ef4444;
+  color: var(--red-primary);
   margin: 0 auto 16px;
   transition: transform 0.3s ease;
 }
@@ -718,13 +758,13 @@ body::after {
 }
 
 .about-card-text {
-  color: #d1d5db;
+  color: var(--text-secondary);
 }
 
 /* Enhanced donations section */
 .donations-section {
   padding: 64px 0;
-  background: radial-gradient(circle at center, rgba(239, 68, 68, 0.05) 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(255, 0, 0, 0.05) 0%, transparent 70%);
   position: relative;
 }
 
@@ -764,7 +804,7 @@ body::after {
   transform: translateX(-50%);
   width: 60px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #ef4444, transparent);
+  background: linear-gradient(90deg, transparent, var(--red-primary), transparent);
   animation: pulse-line 2s ease-in-out infinite;
 }
 
@@ -776,15 +816,16 @@ body::after {
 
 /* Modified donation cards to have corner glow effect instead of full border glow */
 .donation-card {
-  background: linear-gradient(145deg, #1f2937, #111827);
-  border: 2px solid #374151;
-  border-radius: 16px;
-  padding: 24px;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  border: 1px solid rgba(255, 0, 0, 0.1);
+  box-shadow: 16px 16px 32px rgba(0, 0, 0, 0.8), -16px -16px 32px rgba(64, 64, 64, 0.1);
+  border-radius: 15px;
+  padding: 20px;
   text-align: center;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  animation: donation-card-entrance 0.6s ease-out;
+  backdrop-filter: blur(10px);
 }
 
 .donation-card:nth-child(2) {
@@ -831,21 +872,20 @@ body::after {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(145deg, #1f2937, #111827);
+  background: var(--bg-secondary);
   border-radius: 16px;
   z-index: -1;
 }
 
 .donation-card:hover {
-  border-color: #ef4444;
-  transform: translateY(-12px) scale(1.03) rotateX(5deg);
-  box-shadow: 0 25px 50px rgba(239, 68, 68, 0.25), 0 15px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0
-    rgba(255, 255, 255, 0.1);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 16px 16px 32px rgba(0, 0, 0, 0.9), -16px -16px 32px rgba(64, 64, 64, 0.15), 0 0 30px rgba(255, 0, 0, 0.2);
+  border-color: rgba(255, 0, 0, 0.3);
 }
 
 .donation-card:hover::before {
   opacity: 1;
-  box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
 }
 
 @keyframes border-glow-rotate {
@@ -871,12 +911,10 @@ body::after {
   width: 100%;
   height: 128px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 16px;
   margin-bottom: 16px;
-  background-color: #374151;
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: inset 8px 8px 16px var(--bg-primary), inset -8px -8px 16px var(--bg-accent);
 }
 
 .donation-image::before {
@@ -886,60 +924,41 @@ body::after {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
   transition: left 0.8s ease;
   z-index: 1;
 }
 
 .donation-card:hover .donation-image {
-  transform: scale(1.08) rotate(1deg);
-  filter: brightness(1.1) saturate(1.2);
-}
-
-.donation-card:hover .donation-image::before {
-  left: 100%;
+  transform: scale(1.05);
+  box-shadow: inset 4px 4px 8px var(--bg-primary), inset -4px -4px 8px var(--bg-accent);
 }
 
 .donation-name {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   margin-bottom: 8px;
-  color: white;
-  transition: color 0.3s ease;
-}
-
-.donation-card:hover .donation-name {
-  color: #fca5a5;
+  color: var(--text-primary);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8), -1px -1px 2px rgba(127, 29, 29, 0.4);
 }
 
 .donation-price {
-  color: #f87171;
-  font-weight: 700;
-  margin-bottom: 16px;
-  font-size: 20px;
-  animation: price-glow 2s ease-in-out infinite;
-}
-
-@keyframes price-glow {
-  0%,
-  100% {
-    text-shadow: 0 0 5px rgba(248, 113, 113, 0.5);
-  }
-  50% {
-    text-shadow: 0 0 15px rgba(248, 113, 113, 0.8);
-  }
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--red-primary);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8), -1px -1px 2px rgba(127, 29, 29, 0.4);
 }
 
 .donation-btn {
   display: inline-block;
   width: 100%;
-  background: linear-gradient(135deg, #dc2626, #ef4444);
-  color: white;
+  background: var(--bg-secondary);
+  color: var(--red-primary);
   text-decoration: none;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 1px solid #000000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 16px 32px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  box-shadow: 12px 12px 24px var(--bg-primary), -12px -12px 24px var(--bg-accent); /* Dark neumorphic shadows */
   transition: all 0.3s ease;
   font-weight: 600;
   position: relative;
@@ -953,7 +972,7 @@ body::after {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
   transition: left 0.5s ease;
 }
 
@@ -976,9 +995,8 @@ body::after {
 }
 
 .donation-btn:hover {
-  background: linear-gradient(135deg, #b91c1c, #dc2626);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 6px 6px 12px var(--bg-primary), inset -6px -6px 12px var(--bg-accent); /* Dark neumorphic hover effect */
+  transform: translateY(2px); /* Dark neumorphic hover effect */
 }
 
 .donation-btn:hover::before {
@@ -1010,7 +1028,7 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, rgba(239, 68, 68, 0.02), transparent, rgba(239, 68, 68, 0.02));
+  background: linear-gradient(45deg, rgba(255, 0, 0, 0.02), transparent, rgba(255, 0, 0, 0.02));
   animation: join-glow 8s ease-in-out infinite;
 }
 
@@ -1060,7 +1078,7 @@ body::after {
 
 .join-step:hover {
   padding-left: 10px;
-  border-left: 3px solid #ef4444;
+  border-left: 3px solid var(--red-primary);
 }
 
 .join-step:last-child {
@@ -1081,7 +1099,7 @@ body::after {
 }
 
 .step-text {
-  color: #d1d5db;
+  color: var(--text-secondary);
 }
 
 .step-link {
@@ -1109,12 +1127,13 @@ body::after {
 }
 
 .gallery-item {
-  overflow: hidden;
+  background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-accent) 100%);
+  border: 1px solid rgba(255, 0, 0, 0.1);
   border-radius: 16px;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  animation: gallery-entrance 0.8s ease-out;
+  box-shadow: 10px 10px 20px var(--bg-primary), -10px -10px 20px var(--bg-accent);
 }
 
 .gallery-item:nth-child(2) {
@@ -1145,15 +1164,16 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, rgba(239, 68, 68, 0.2), transparent, rgba(239, 68, 68, 0.2));
+  background: linear-gradient(45deg, rgba(255, 0, 0, 0.2), transparent, rgba(255, 0, 0, 0.2));
   opacity: 0;
   transition: opacity 0.4s ease;
   z-index: 1;
 }
 
 .gallery-item:hover {
-  transform: translateY(-20px) scale(1.05) rotateY(5deg);
-  box-shadow: 0 35px 70px rgba(239, 68, 68, 0.4), 0 20px 40px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 14px 14px 28px var(--bg-primary), -14px -14px 28px var(--bg-accent), 0 0 20px rgba(255, 0, 0, 0.1);
+  border-color: rgba(255, 0, 0, 0.2);
 }
 
 .gallery-item:hover::before {
@@ -1189,7 +1209,7 @@ body::after {
   left: 0;
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #ef4444, transparent);
+  background: linear-gradient(90deg, transparent, var(--red-primary), transparent);
   animation: footer-line 3s ease-in-out infinite;
 }
 
@@ -1204,7 +1224,7 @@ body::after {
 }
 
 .footer-text {
-  color: #9ca3af;
+  color: var(--text-muted);
   margin-bottom: 8px;
   animation: footer-text 1s ease-out;
 }
@@ -1314,5 +1334,17 @@ body::after {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
   }
 }
