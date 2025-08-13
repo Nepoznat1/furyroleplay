@@ -240,9 +240,57 @@ body {
   }
 }
 
-.scroll-indicator {
+/* Added floating navigation button styles */
+.floating-nav {
   position: fixed;
   bottom: 32px;
+  right: 32px;
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 180px;
+  justify-content: center;
+}
+
+.floating-nav:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 12px 40px rgba(220, 38, 38, 0.4);
+  background: linear-gradient(135deg, #b91c1c, #dc2626);
+}
+
+.floating-nav:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.floating-nav-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.floating-nav:hover .floating-nav-icon {
+  transform: translateY(2px);
+}
+
+.floating-nav-text {
+  white-space: nowrap;
+}
+
+.scroll-indicator {
+  position: fixed;
+  bottom: 100px;
   right: 32px;
   background: rgba(220, 38, 38, 0.9);
   color: white;
@@ -256,7 +304,7 @@ body {
   pointer-events: none;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(239, 68, 68, 0.3);
-  z-index: 1000;
+  z-index: 999;
 }
 
 .scroll-indicator.show {
