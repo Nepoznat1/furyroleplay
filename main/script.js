@@ -72,40 +72,20 @@ function populateContent() {
   }
 }
 
-// Smooth scrolling for anchor links
 function initSmoothScrolling() {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault()
       const target = document.querySelector(this.getAttribute("href"))
       if (target) {
-        target.scrollIntoView({
+        const targetPosition = target.offsetTop - 80
+        window.scrollTo({
+          top: targetPosition,
           behavior: "smooth",
-          block: "start",
         })
       }
     })
   })
-}
-
-let ticking = false
-
-function updateScrollAnimations() {
-  const scrolled = window.pageYOffset
-  const heroSection = document.querySelector(".hero-section")
-
-  if (heroSection && scrolled < window.innerHeight) {
-    heroSection.style.transform = `translateY(${scrolled * 0.2}px)`
-  }
-
-  ticking = false
-}
-
-function requestScrollUpdate() {
-  if (!ticking) {
-    requestAnimationFrame(updateScrollAnimations)
-    ticking = true
-  }
 }
 
 function addLoadingAnimations() {
@@ -118,7 +98,7 @@ function addLoadingAnimations() {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("animate-in")
-        observer.unobserve(entry.target) // Stop observing once animated
+        observer.unobserve(entry.target)
       }
     })
   }, observerOptions)
@@ -134,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
   populateContent()
   initSmoothScrolling()
 
-  setTimeout(addLoadingAnimations, 50)
+  setTimeout(addLoadingAnimations, 100)
 
   document.addEventListener("click", (e) => {
     if (e.target.classList.contains("donation-btn") || e.target.classList.contains("discord-btn")) {
@@ -144,6 +124,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 100)
     }
   })
-
-  window.addEventListener("scroll", requestScrollUpdate, { passive: true })
 })
