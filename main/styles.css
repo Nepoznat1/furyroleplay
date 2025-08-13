@@ -1,3 +1,4 @@
+/* Optimized animations and added new hero title animation */
 * {
   margin: 0;
   padding: 0;
@@ -6,31 +7,51 @@
 
 body {
   font-family: "Inter", sans-serif;
-  background-color: #000000;
+  background: linear-gradient(135deg, #000000 0%, #0a0a0a 25%, #000000 50%, #0a0a0a 75%, #000000 100%);
   color: #ffffff;
   line-height: 1.6;
   min-height: 100vh;
-  /* Added hardware acceleration for smoother animations */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Simplified background particles for better performance */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(2px 2px at 20px 30px, rgba(239, 68, 68, 0.3), transparent),
+    radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.1), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(239, 68, 68, 0.2), transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: particles-float 20s linear infinite;
+  z-index: -2;
+  pointer-events: none;
+  will-change: transform;
+}
+
+@keyframes particles-float {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-10px) translateX(5px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
-}
-
-/* Added animation classes for better performance */
-.animate-ready {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.animate-in {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* Discord Banner */
@@ -46,7 +67,6 @@ body {
   margin-bottom: 12px;
 }
 
-/* Enhanced Discord button with black borders and better styling */
 .discord-btn {
   display: inline-flex;
   align-items: center;
@@ -58,9 +78,8 @@ body {
   text-decoration: none;
   border-radius: 8px;
   border: 2px solid #000000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
@@ -78,18 +97,12 @@ body {
 
 .discord-btn:hover {
   background: linear-gradient(135deg, #b91c1c, #dc2626);
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  border-color: #333333;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .discord-btn:hover::before {
   left: 100%;
-}
-
-.discord-btn:active {
-  transform: translateY(0) scale(0.98);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .external-icon {
@@ -97,23 +110,50 @@ body {
   height: 16px;
 }
 
-/* Hero Section */
+/* New optimized hero section with better title animation */
 .hero-section {
-  padding: 64px 0;
+  padding: 80px 0;
   text-align: center;
-  /* Added will-change for parallax optimization */
-  will-change: transform;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, rgba(239, 68, 68, 0.08) 0%, transparent 70%);
 }
 
+/* Fixed glow positioning and improved hero title animation */
 .hero-title {
-  font-size: 4rem;
-  font-weight: 700;
-  margin-bottom: 24px;
-  background: linear-gradient(to right, #ef4444, #ffffff);
+  font-size: 4.5rem;
+  font-weight: 800;
+  margin-bottom: 32px;
+  position: relative;
+  letter-spacing: -0.02em;
+  background: linear-gradient(45deg, #ff0000, #ffffff, #ff4444, #ffffff, #ff0000);
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent;
+  animation: neon-glow 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.6));
+}
+
+/* Fixed neon glow animation for hero title */
+@keyframes neon-glow {
+  0%,
+  100% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.8)) drop-shadow(0 0 40px rgba(255, 0, 0, 0.4));
+  }
+  25% {
+    background-position: 100% 50%;
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 50px rgba(255, 0, 0, 0.6));
+  }
+  50% {
+    background-position: 50% 100%;
+    filter: drop-shadow(0 0 25px rgba(255, 68, 68, 0.9)) drop-shadow(0 0 45px rgba(255, 255, 255, 0.3));
+  }
+  75% {
+    background-position: 0% 100%;
+    filter: drop-shadow(0 0 35px rgba(255, 0, 0, 0.7)) drop-shadow(0 0 60px rgba(255, 68, 68, 0.5));
+  }
 }
 
 .hero-description {
@@ -124,10 +164,11 @@ body {
   line-height: 1.7;
 }
 
-/* About Section */
+/* Optimized section styling */
 .about-section {
-  background-color: #111827;
+  background: linear-gradient(135deg, #111827 0%, #0f172a 100%);
   padding: 64px 0;
+  position: relative;
 }
 
 .section-title {
@@ -140,6 +181,32 @@ body {
   align-items: center;
   justify-content: center;
   gap: 12px;
+  text-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ef4444, transparent);
+  animation: pulse-line 2s ease-in-out infinite;
+}
+
+@keyframes pulse-line {
+  0%,
+  100% {
+    opacity: 0.5;
+    width: 60px;
+  }
+  50% {
+    opacity: 1;
+    width: 100px;
+  }
 }
 
 .section-icon {
@@ -155,19 +222,20 @@ body {
 }
 
 .about-card {
-  background-color: #1f2937;
+  background: linear-gradient(145deg, #1f2937, #111827);
   border: 1px solid #374151;
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 24px;
   text-align: center;
-  /* Optimized transition */
-  transition: border-color 0.2s ease, transform 0.2s ease;
-  will-change: transform;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .about-card:hover {
   border-color: #ef4444;
-  transform: translateY(-2px);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(239, 68, 68, 0.2);
 }
 
 .about-icon {
@@ -186,14 +254,14 @@ body {
   color: #d1d5db;
 }
 
-/* Donations Section */
+/* Optimized donations section */
 .donations-section {
   padding: 64px 0;
+  background: radial-gradient(circle at center, rgba(239, 68, 68, 0.03) 0%, transparent 70%);
 }
 
 .donation-category {
   margin-bottom: 80px;
-  position: relative;
 }
 
 .category-title {
@@ -211,175 +279,68 @@ body {
 .category-title::after {
   content: "";
   position: absolute;
-  bottom: 0;
+  bottom: -8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #ef4444, #f87171);
-  transition: width 0.6s ease;
-}
-
-.category-title.animate-in::after {
-  width: 120px;
-}
-
-.donation-category:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  bottom: -40px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.3), transparent);
-}
-
-.category-divider {
-  position: relative;
-  margin: 48px 0;
+  width: 60px;
   height: 2px;
   background: linear-gradient(90deg, transparent, #ef4444, transparent);
-  overflow: hidden;
-}
-
-.category-divider::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, #ffffff, transparent);
-  animation: divider-shine 3s infinite;
-}
-
-@keyframes divider-shine {
-  0% {
-    left: -100%;
-  }
-  50% {
-    left: 100%;
-  }
-  100% {
-    left: 100%;
-  }
-}
-
-/* Added floating navigation button styles */
-.floating-nav {
-  position: fixed;
-  bottom: 32px;
-  right: 32px;
-  background: linear-gradient(135deg, #dc2626, #ef4444);
-  color: white;
-  border: none;
-  border-radius: 50px;
-  padding: 16px 24px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 180px;
-  justify-content: center;
-}
-
-.floating-nav:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 12px 40px rgba(220, 38, 38, 0.4);
-  background: linear-gradient(135deg, #b91c1c, #dc2626);
-}
-
-.floating-nav:active {
-  transform: translateY(0) scale(0.98);
-}
-
-.floating-nav-icon {
-  width: 20px;
-  height: 20px;
-  transition: transform 0.3s ease;
-}
-
-.floating-nav:hover .floating-nav-icon {
-  transform: translateY(2px);
-}
-
-.floating-nav-text {
-  white-space: nowrap;
-}
-
-.scroll-indicator {
-  position: fixed;
-  bottom: 100px;
-  right: 32px;
-  background: rgba(220, 38, 38, 0.9);
-  color: white;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.3s ease;
-  pointer-events: none;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  z-index: 999;
-}
-
-.scroll-indicator.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.scroll-indicator::before {
-  content: "↓";
-  margin-right: 8px;
-  animation: bounce-arrow 2s infinite;
-}
-
-@keyframes bounce-arrow {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-4px);
-  }
-  60% {
-    transform: translateY(-2px);
-  }
+  animation: pulse-line 2s ease-in-out infinite;
 }
 
 .donation-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 24px;
-  /* Added containment for better performance */
-  contain: layout style;
 }
 
+/* Added animated border hover effects to donation cards */
 .donation-card {
-  background-color: #1f2937;
-  border: 1px solid #374151;
-  border-radius: 8px;
+  background: linear-gradient(145deg, #1f2937, #111827);
+  border: 2px solid #374151;
+  border-radius: 16px;
   padding: 24px;
   text-align: center;
-  /* Simplified transitions to prevent glitches */
-  transition: border-color 0.15s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.donation-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(45deg, #ef4444, #dc2626, #ef4444);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .donation-card:hover {
-  border-color: #ef4444;
+  border-color: transparent;
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(239, 68, 68, 0.2);
+}
+
+.donation-card:hover::before {
+  opacity: 1;
+  animation: border-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes border-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
 }
 
 .donation-image {
@@ -389,10 +350,11 @@ body {
   border-radius: 8px;
   margin-bottom: 16px;
   background-color: #374151;
-  /* Added image loading optimization */
-  loading: lazy;
-  /* Prevent layout shift during loading */
-  display: block;
+  transition: transform 0.3s ease;
+}
+
+.donation-card:hover .donation-image {
+  transform: scale(1.05);
 }
 
 .donation-name {
@@ -408,7 +370,6 @@ body {
   margin-bottom: 16px;
 }
 
-/* Enhanced donation button styling to match Discord button */
 .donation-btn {
   display: inline-block;
   width: 100%;
@@ -421,30 +382,12 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease;
   font-weight: 600;
-  position: relative;
-  overflow: hidden;
-}
-
-.donation-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.4s ease;
 }
 
 .donation-btn:hover {
   background: linear-gradient(135deg, #b91c1c, #dc2626);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  border-color: #333333;
-}
-
-.donation-btn:hover::before {
-  left: 100%;
 }
 
 /* Join Section */
@@ -498,9 +441,10 @@ body {
   color: #fca5a5;
 }
 
-/* Gallery Section */
+/* Optimized gallery section */
 .gallery-section {
   padding: 64px 0;
+  background: linear-gradient(180deg, #000000 0%, #0f172a 50%, #000000 100%);
 }
 
 .gallery-grid {
@@ -511,27 +455,27 @@ body {
 
 .gallery-item {
   overflow: hidden;
-  border-radius: 8px;
-  /* Reduced hover effect intensity */
-  transition: transform 0.2s ease;
-  will-change: transform;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 .gallery-item:hover {
-  transform: scale(1.02);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(239, 68, 68, 0.2);
 }
 
 .gallery-image {
   width: 100%;
   height: 256px;
   object-fit: cover;
-  /* Simplified image transition */
-  transition: filter 0.2s ease;
   background-color: #374151;
+  transition: transform 0.3s ease;
 }
 
 .gallery-item:hover .gallery-image {
-  filter: brightness(1.05);
+  transform: scale(1.05);
 }
 
 /* Footer */
@@ -592,15 +536,23 @@ body {
   }
 }
 
-/* Added prefers-reduced-motion support for accessibility */
+/* Added performance optimizations */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
 
-  .hero-section {
-    transform: none !important;
-  }
+/* Optimized entrance animations */
+.animate-ready {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.animate-in {
+  opacity: 1;
+  transform: translateY(0);
 }
