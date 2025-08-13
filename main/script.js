@@ -243,99 +243,6 @@ function initSmoothScrolling() {
   })
 }
 
-// Function to create floating navigation functionality
-function initFloatingNavigation() {
-  // Define all sections in order from top to bottom
-  const sections = [
-    { id: "about-section", name: "O nama", icon: "👥" },
-    { id: "vehicles-section", name: "Vozila", icon: "🚗" },
-    { id: "organizations-section", name: "Organizacije", icon: "👨‍👩‍👧‍👦" },
-    { id: "admins-section", name: "Admini", icon: "🛡️" },
-    { id: "commands-section", name: "Komande", icon: "⌨️" },
-    { id: "addons-section", name: "Dodaci", icon: "⚙️" },
-    { id: "join-section", name: "Pridruži se", icon: "🎮" },
-    { id: "gallery-section", name: "Galerija", icon: "📸" },
-  ]
-
-  // Create floating navigation button
-  const floatingNav = document.createElement("button")
-  floatingNav.className = "floating-nav"
-  floatingNav.innerHTML = `
-    <span class="floating-nav-icon">👥</span>
-    <span class="floating-nav-text">Idi na O nama</span>
-  `
-  document.body.appendChild(floatingNav)
-
-  let currentTargetIndex = 0
-
-  // Function to find which section user is currently viewing
-  function getCurrentSection() {
-    const scrollTop = window.scrollY + 100 // Add offset for better detection
-
-    for (let i = sections.length - 1; i >= 0; i--) {
-      const sectionElement = document.getElementById(sections[i].id)
-      if (sectionElement && sectionElement.offsetTop <= scrollTop) {
-        return i
-      }
-    }
-    return -1 // User is above all sections (in hero)
-  }
-
-  // Function to update the button to show next section
-  function updateButton() {
-    const currentSectionIndex = getCurrentSection()
-    let nextSectionIndex
-
-    // If user is above all sections or at the last section, show first section
-    if (currentSectionIndex === -1 || currentSectionIndex === sections.length - 1) {
-      nextSectionIndex = 0
-    } else {
-      // Show next section after current one
-      nextSectionIndex = currentSectionIndex + 1
-    }
-
-    const nextSection = sections[nextSectionIndex]
-    const icon = floatingNav.querySelector(".floating-nav-icon")
-    const text = floatingNav.querySelector(".floating-nav-text")
-
-    if (icon && text && nextSection) {
-      icon.textContent = nextSection.icon
-      text.textContent = `Idi na ${nextSection.name}`
-      currentTargetIndex = nextSectionIndex
-    }
-  }
-
-  // Function to scroll to the target section
-  function scrollToTarget() {
-    const targetSection = sections[currentTargetIndex]
-    const targetElement = document.getElementById(targetSection.id)
-
-    if (targetElement) {
-      const targetPosition = targetElement.offsetTop - 80
-      window.scrollTo({
-        top: targetPosition,
-        behavior: "smooth",
-      })
-    }
-  }
-
-  // Add click event listener
-  floatingNav.addEventListener("click", (e) => {
-    e.preventDefault()
-    scrollToTarget()
-  })
-
-  // Add scroll event listener with throttling
-  let scrollTimeout
-  window.addEventListener("scroll", () => {
-    clearTimeout(scrollTimeout)
-    scrollTimeout = setTimeout(updateButton, 100)
-  })
-
-  // Initialize button
-  updateButton()
-}
-
 function initScrollIndicators() {
   // Create scroll indicator element
   const scrollIndicator = document.createElement("div")
@@ -423,7 +330,6 @@ document.addEventListener("DOMContentLoaded", () => {
   populateContent()
   initSmoothScrolling()
   initScrollIndicators()
-  initFloatingNavigation() // Added floating navigation initialization
 
   setTimeout(addLoadingAnimations, 100)
 
