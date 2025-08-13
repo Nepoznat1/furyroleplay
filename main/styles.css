@@ -1,3 +1,4 @@
+/* Added floating elements, enhanced card animations, and more visual effects */
 /* Optimized animations and added new hero title animation */
 * {
   margin: 0;
@@ -17,7 +18,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Simplified background particles for better performance */
+/* Enhanced background with floating geometric shapes */
 body::before {
   content: "";
   position: fixed;
@@ -25,26 +26,74 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(2px 2px at 20px 30px, rgba(239, 68, 68, 0.3), transparent),
-    radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.1), transparent),
-    radial-gradient(1px 1px at 90px 40px, rgba(239, 68, 68, 0.2), transparent);
+  background-image: radial-gradient(2px 2px at 20px 30px, rgba(239, 68, 68, 0.6), transparent),
+    radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(239, 68, 68, 0.4), transparent),
+    radial-gradient(3px 3px at 160px 120px, rgba(255, 68, 68, 0.3), transparent),
+    radial-gradient(2px 2px at 200px 50px, rgba(255, 255, 255, 0.2), transparent);
   background-repeat: repeat;
-  background-size: 200px 100px;
+  background-size: 300px 150px;
   animation: particles-float 20s linear infinite;
   z-index: -2;
   pointer-events: none;
   will-change: transform;
 }
 
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 30%, rgba(239, 68, 68, 0.03) 50%, transparent 70%),
+    linear-gradient(-45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%),
+    linear-gradient(135deg, transparent 40%, rgba(239, 68, 68, 0.02) 60%, transparent 80%);
+  animation: diagonal-sweep 25s ease-in-out infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
 @keyframes particles-float {
   0% {
-    transform: translateY(0px) translateX(0px);
+    transform: translateY(0px) translateX(0px) rotate(0deg);
   }
-  50% {
-    transform: translateY(-10px) translateX(5px);
+  33% {
+    transform: translateY(-15px) translateX(10px) rotate(120deg);
+  }
+  66% {
+    transform: translateY(5px) translateX(-5px) rotate(240deg);
   }
   100% {
-    transform: translateY(0px) translateX(0px);
+    transform: translateY(0px) translateX(0px) rotate(360deg);
+  }
+}
+
+@keyframes diagonal-sweep {
+  0%,
+  100% {
+    transform: translateX(-50px) translateY(-50px) rotate(0deg);
+    opacity: 0.4;
+  }
+  33% {
+    transform: translateX(25px) translateY(25px) rotate(120deg);
+    opacity: 0.7;
+  }
+  66% {
+    transform: translateX(-25px) translateY(50px) rotate(240deg);
+    opacity: 0.5;
+  }
+}
+
+@keyframes geometric-float {
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+    opacity: 0.6;
   }
 }
 
@@ -54,17 +103,64 @@ body::before {
   padding: 0 24px;
 }
 
-/* Discord Banner */
+/* Enhanced Discord Banner with wave animation */
 .discord-banner {
-  background: linear-gradient(to right, #dc2626, #ef4444);
+  background: linear-gradient(45deg, #dc2626, #ef4444, #dc2626);
+  background-size: 200% 200%;
+  animation: gradient-wave 4s ease-in-out infinite;
   padding: 16px 24px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.discord-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: banner-shine 3s ease-in-out infinite;
+}
+
+@keyframes gradient-wave {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes banner-shine {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 .discord-text {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 12px;
+  animation: text-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes text-glow {
+  from {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  }
+  to {
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+  }
 }
 
 .discord-btn {
@@ -97,7 +193,7 @@ body::before {
 
 .discord-btn:hover {
   background: linear-gradient(135deg, #b91c1c, #dc2626);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.05);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
@@ -108,18 +204,99 @@ body::before {
 .external-icon {
   width: 16px;
   height: 16px;
+  animation: icon-bounce 2s ease-in-out infinite;
 }
 
-/* New optimized hero section with better title animation */
+@keyframes icon-bounce {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Enhanced hero section with floating elements */
 .hero-section {
   padding: 80px 0;
   text-align: center;
   position: relative;
   overflow: hidden;
-  background: radial-gradient(ellipse at center, rgba(239, 68, 68, 0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(239, 68, 68, 0.15) 0%, transparent 70%);
 }
 
-/* Fixed glow positioning and improved hero title animation */
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 15%;
+  left: 8%;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(45deg, rgba(239, 68, 68, 0.15), rgba(255, 255, 255, 0.05));
+  border-radius: 50%;
+  animation: float-1 8s ease-in-out infinite;
+  filter: blur(1px);
+}
+
+.hero-section::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(239, 68, 68, 0.12));
+  border-radius: 50%;
+  animation: float-2 10s ease-in-out infinite reverse;
+  filter: blur(0.5px);
+}
+
+.hero-section:before {
+  content: "";
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(239, 68, 68, 0.08));
+  border-radius: 50%;
+  animation: float-3 12s ease-in-out infinite;
+  transform: translateX(-50%);
+  filter: blur(0.8px);
+}
+
+@keyframes float-1 {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
+@keyframes float-2 {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(15px) rotate(-180deg);
+  }
+}
+
+@keyframes float-3 {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-30px) scale(1.2);
+  }
+}
+
+/* Enhanced hero title with better glow effects */
 .hero-title {
   font-size: 4.5rem;
   font-weight: 800;
@@ -135,24 +312,28 @@ body::before {
   filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.6));
 }
 
-/* Fixed neon glow animation for hero title */
+/* Enhanced neon glow animation */
 @keyframes neon-glow {
   0%,
   100% {
     background-position: 0% 50%;
-    filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.8)) drop-shadow(0 0 40px rgba(255, 0, 0, 0.4));
+    filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.8)) drop-shadow(0 0 40px rgba(255, 0, 0, 0.4))
+      drop-shadow(0 0 60px rgba(255, 0, 0, 0.2));
   }
   25% {
     background-position: 100% 50%;
-    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 50px rgba(255, 0, 0, 0.6));
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 50px rgba(255, 0, 0, 0.6))
+      drop-shadow(0 0 70px rgba(255, 255, 255, 0.3));
   }
   50% {
     background-position: 50% 100%;
-    filter: drop-shadow(0 0 25px rgba(255, 68, 68, 0.9)) drop-shadow(0 0 45px rgba(255, 255, 255, 0.3));
+    filter: drop-shadow(0 0 25px rgba(255, 68, 68, 0.9)) drop-shadow(0 0 45px rgba(255, 255, 255, 0.3))
+      drop-shadow(0 0 65px rgba(255, 68, 68, 0.4));
   }
   75% {
     background-position: 0% 100%;
-    filter: drop-shadow(0 0 35px rgba(255, 0, 0, 0.7)) drop-shadow(0 0 60px rgba(255, 68, 68, 0.5));
+    filter: drop-shadow(0 0 35px rgba(255, 0, 0, 0.7)) drop-shadow(0 0 60px rgba(255, 68, 68, 0.5))
+      drop-shadow(0 0 80px rgba(255, 0, 0, 0.3));
   }
 }
 
@@ -162,13 +343,48 @@ body::before {
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.7;
+  animation: fade-in-up 1s ease-out 0.5s both;
 }
 
-/* Optimized section styling */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced section styling with animated backgrounds */
 .about-section {
   background: linear-gradient(135deg, #111827 0%, #0f172a 100%);
   padding: 64px 0;
   position: relative;
+  overflow: hidden;
+}
+
+.about-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 80%, rgba(239, 68, 68, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+  animation: section-glow 10s ease-in-out infinite;
+}
+
+@keyframes section-glow {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .section-title {
@@ -183,6 +399,18 @@ body::before {
   gap: 12px;
   text-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
   position: relative;
+  animation: title-entrance 0.8s ease-out;
+}
+
+@keyframes title-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .section-title::after {
@@ -211,6 +439,17 @@ body::before {
 
 .section-icon {
   color: #ef4444;
+  animation: icon-pulse 2s ease-in-out infinite;
+}
+
+@keyframes icon-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 .about-grid {
@@ -221,26 +460,66 @@ body::before {
   margin: 0 auto;
 }
 
+/* Enhanced about cards with staggered animations */
 .about-card {
   background: linear-gradient(145deg, #1f2937, #111827);
   border: 1px solid #374151;
   border-radius: 12px;
   padding: 24px;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
+  animation: card-entrance 0.6s ease-out;
+}
+
+.about-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.about-card:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes card-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.about-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.1), transparent);
+  transition: left 0.6s ease;
 }
 
 .about-card:hover {
   border-color: #ef4444;
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(239, 68, 68, 0.2);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(239, 68, 68, 0.2);
+}
+
+.about-card:hover::before {
+  left: 100%;
 }
 
 .about-icon {
   color: #ef4444;
   margin: 0 auto 16px;
+  transition: transform 0.3s ease;
+}
+
+.about-card:hover .about-icon {
+  transform: scale(1.2) rotate(5deg);
 }
 
 .about-card-title {
@@ -254,10 +533,11 @@ body::before {
   color: #d1d5db;
 }
 
-/* Optimized donations section */
+/* Enhanced donations section */
 .donations-section {
   padding: 64px 0;
-  background: radial-gradient(circle at center, rgba(239, 68, 68, 0.03) 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(239, 68, 68, 0.05) 0%, transparent 70%);
+  position: relative;
 }
 
 .donation-category {
@@ -274,6 +554,18 @@ body::before {
   gap: 8px;
   position: relative;
   padding: 16px 0;
+  animation: category-entrance 0.8s ease-out;
+}
+
+@keyframes category-entrance {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .category-title::after {
@@ -294,55 +586,99 @@ body::before {
   gap: 24px;
 }
 
-/* Added animated border hover effects to donation cards */
+/* Modified donation cards to have corner glow effect instead of full border glow */
 .donation-card {
   background: linear-gradient(145deg, #1f2937, #111827);
   border: 2px solid #374151;
   border-radius: 16px;
   padding: 24px;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  animation: donation-card-entrance 0.6s ease-out;
 }
 
+.donation-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.donation-card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.donation-card:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+@keyframes donation-card-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(50px) rotateX(10deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+/* Replaced corner glow with elegant outline glow effect */
 .donation-card::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #dc2626, transparent, transparent, #dc2626);
+  border-radius: 18px;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  animation: border-glow-rotate 3s linear infinite;
+}
+
+.donation-card::after {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  background: linear-gradient(145deg, #1f2937, #111827);
   border-radius: 16px;
-  padding: 2px;
-  background: linear-gradient(45deg, #ef4444, #dc2626, #ef4444);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  z-index: -1;
 }
 
 .donation-card:hover {
-  border-color: transparent;
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(239, 68, 68, 0.2);
+  border-color: #ef4444;
+  transform: translateY(-12px) scale(1.03) rotateX(5deg);
+  box-shadow: 0 25px 50px rgba(239, 68, 68, 0.25), 0 15px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0
+    rgba(255, 255, 255, 0.1);
 }
 
 .donation-card:hover::before {
   opacity: 1;
-  animation: border-pulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
 }
 
-@keyframes border-pulse {
-  0%,
-  100% {
-    opacity: 1;
+@keyframes border-glow-rotate {
+  0% {
+    background: linear-gradient(45deg, #dc2626, transparent, transparent, #dc2626);
+  }
+  25% {
+    background: linear-gradient(135deg, #dc2626, transparent, transparent, #dc2626);
   }
   50% {
-    opacity: 0.6;
+    background: linear-gradient(225deg, #dc2626, transparent, transparent, #dc2626);
+  }
+  75% {
+    background: linear-gradient(315deg, #dc2626, transparent, transparent, #dc2626);
+  }
+  100% {
+    background: linear-gradient(45deg, #dc2626, transparent, transparent, #dc2626);
   }
 }
 
+/* Enhanced image hover with shimmer effect */
 .donation-image {
   width: 100%;
   height: 128px;
@@ -350,11 +686,30 @@ body::before {
   border-radius: 8px;
   margin-bottom: 16px;
   background-color: #374151;
-  transition: transform 0.3s ease;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.donation-image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.8s ease;
+  z-index: 1;
 }
 
 .donation-card:hover .donation-image {
-  transform: scale(1.05);
+  transform: scale(1.08) rotate(1deg);
+  filter: brightness(1.1) saturate(1.2);
+}
+
+.donation-card:hover .donation-image::before {
+  left: 100%;
 }
 
 .donation-name {
@@ -362,12 +717,29 @@ body::before {
   font-weight: 600;
   margin-bottom: 8px;
   color: white;
+  transition: color 0.3s ease;
+}
+
+.donation-card:hover .donation-name {
+  color: #fca5a5;
 }
 
 .donation-price {
   color: #f87171;
   font-weight: 700;
   margin-bottom: 16px;
+  font-size: 20px;
+  animation: price-glow 2s ease-in-out infinite;
+}
+
+@keyframes price-glow {
+  0%,
+  100% {
+    text-shadow: 0 0 5px rgba(248, 113, 113, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 15px rgba(248, 113, 113, 0.8);
+  }
 }
 
 .donation-btn {
@@ -376,33 +748,92 @@ body::before {
   background: linear-gradient(135deg, #dc2626, #ef4444);
   color: white;
   text-decoration: none;
-  padding: 10px 16px;
-  border-radius: 6px;
+  padding: 12px 16px;
+  border-radius: 8px;
   border: 1px solid #000000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
   font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+
+.donation-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.donation-btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.donation-btn:active::after {
+  width: 300px;
+  height: 300px;
 }
 
 .donation-btn:hover {
   background: linear-gradient(135deg, #b91c1c, #dc2626);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.donation-btn:hover::before {
+  left: 100%;
 }
 
 /* Join Section */
 .join-section {
   background-color: #111827;
   padding: 64px 0;
+  position: relative;
 }
 
 .join-card {
-  background-color: #1f2937;
+  background: linear-gradient(145deg, #1f2937, #111827);
   border: 1px solid #374151;
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 32px;
   max-width: 1000px;
   margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.join-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(239, 68, 68, 0.02), transparent, rgba(239, 68, 68, 0.02));
+  animation: join-glow 8s ease-in-out infinite;
+}
+
+@keyframes join-glow {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 .join-steps {
@@ -414,6 +845,34 @@ body::before {
 .join-step {
   padding-bottom: 24px;
   border-bottom: 1px solid #374151;
+  transition: all 0.3s ease;
+  animation: step-entrance 0.6s ease-out both;
+}
+
+.join-step:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.join-step:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.join-step:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes step-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.join-step:hover {
+  padding-left: 10px;
+  border-left: 3px solid #ef4444;
 }
 
 .join-step:last-child {
@@ -426,6 +885,11 @@ body::before {
   font-weight: 600;
   margin-bottom: 12px;
   color: #f87171;
+  transition: color 0.3s ease;
+}
+
+.join-step:hover .step-title {
+  color: #fca5a5;
 }
 
 .step-text {
@@ -435,16 +899,19 @@ body::before {
 .step-link {
   color: #f87171;
   text-decoration: underline;
+  transition: all 0.3s ease;
 }
 
 .step-link:hover {
   color: #fca5a5;
+  text-shadow: 0 0 5px rgba(248, 113, 113, 0.5);
 }
 
-/* Optimized gallery section */
+/* Enhanced gallery section */
 .gallery-section {
   padding: 64px 0;
   background: linear-gradient(180deg, #000000 0%, #0f172a 50%, #000000 100%);
+  position: relative;
 }
 
 .gallery-grid {
@@ -456,14 +923,53 @@ body::before {
 .gallery-item {
   overflow: hidden;
   border-radius: 16px;
-  transition: all 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  animation: gallery-entrance 0.8s ease-out;
+}
+
+.gallery-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.gallery-item:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.gallery-item:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+@keyframes gallery-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.gallery-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(239, 68, 68, 0.2), transparent, rgba(239, 68, 68, 0.2));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
 }
 
 .gallery-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(239, 68, 68, 0.2);
+  transform: translateY(-20px) scale(1.05) rotateY(5deg);
+  box-shadow: 0 35px 70px rgba(239, 68, 68, 0.4), 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-item:hover::before {
+  opacity: 1;
 }
 
 .gallery-image {
@@ -471,28 +977,64 @@ body::before {
   height: 256px;
   object-fit: cover;
   background-color: #374151;
-  transition: transform 0.3s ease;
+  transition: all 0.5s ease;
 }
 
 .gallery-item:hover .gallery-image {
-  transform: scale(1.05);
+  transform: scale(1.1);
+  filter: brightness(1.1) contrast(1.1);
 }
 
-/* Footer */
+/* Enhanced Footer */
 .footer {
-  background-color: #111827;
+  background: linear-gradient(135deg, #111827, #0f172a);
   border-top: 1px solid #1f2937;
   padding: 32px 0;
   text-align: center;
+  position: relative;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #ef4444, transparent);
+  animation: footer-line 3s ease-in-out infinite;
+}
+
+@keyframes footer-line {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .footer-text {
   color: #9ca3af;
   margin-bottom: 8px;
+  animation: footer-text 1s ease-out;
+}
+
+@keyframes footer-text {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .footer-subtext {
   color: #6b7280;
+  animation: footer-text 1s ease-out 0.2s both;
 }
 
 /* Responsive Design */
@@ -536,7 +1078,7 @@ body::before {
   }
 }
 
-/* Added performance optimizations */
+/* Performance optimizations */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -555,4 +1097,38 @@ body::before {
 .animate-in {
   opacity: 1;
   transform: translateY(0);
+}
+
+.stagger-animation {
+  animation: stagger-entrance 0.8s ease-out both;
+}
+
+.stagger-animation:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.stagger-animation:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.stagger-animation:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.stagger-animation:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.stagger-animation:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.stagger-animation:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+@keyframes stagger-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
