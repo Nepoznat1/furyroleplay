@@ -63,38 +63,32 @@ const organizations = [
     image:
       "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
   },
-  {
-    name: "Owner",
-    price: "1245€",
-    image:
-      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
-  },
 ]
 
 const admins = [
   {
-    name: "Helper Admin",
+    name: "Admin",
     price: "10€",
     image:
-      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
-  },
-  {
-    name: "Moderator",
-    price: "25€",
-    image:
-      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
-  },
-  {
-    name: "Admin",
-    price: "50€",
-    image:
-      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+      "https://cdn.discordapp.com/attachments/1405000870977994824/1405002071664623726/cooltext488697671315503.png?ex=689d3da5&is=689bec25&hm=88608ee66502825c2aaf613537862f8081025c4235f66e1b521adb45c890c88d&",
   },
   {
     name: "Super Admin",
+    price: "25€",
+    image:
+      "https://cdn.discordapp.com/attachments/1405000870977994824/1405002141801775226/cooltext488697710813991.png?ex=689d3db6&is=689bec36&hm=815e521e65dbfa4190a0f856a0e742f502ba89786e035426f7b3060e0986466e&",
+  },
+  {
+    name: "Roleplay Admin",
+    price: "50€",
+    image:
+      "https://cdn.discordapp.com/attachments/1405000870977994824/1405002264250159265/cooltext488697725763152.png?ex=689d3dd3&is=689bec53&hm=bbb6f26da31a338ea08edb6a62a40ee54dccc3779b7eff48cf69b748d299b789&",
+  },
+  {
+    name: "Head Admin",
     price: "100€",
     image:
-      "https://cdn.discordapp.com/attachments/1236605109962670181/1394432084709474444/image.png?ex=689d0514&is=689bb394&hm=4ae7f6fcddd0c11e9e09e6de99bcb7f6c980b918f9d14fa179ed45887cdf0f52&",
+      "https://cdn.discordapp.com/attachments/1405000870977994824/1405002278955515944/cooltext488697737176220.png?ex=689d3dd6&is=689bec56&hm=cfeeca70cd92244564d3042a2ea4d213ba78e69100d659efa1b3b5b7e57d2c5d&",
   },
 ]
 
