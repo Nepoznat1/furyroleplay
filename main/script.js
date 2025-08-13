@@ -243,6 +243,64 @@ function initSmoothScrolling() {
   })
 }
 
+function initScrollIndicators() {
+  // Create scroll indicator element
+  const scrollIndicator = document.createElement("div")
+  scrollIndicator.className = "scroll-indicator"
+  scrollIndicator.id = "scroll-indicator"
+  document.body.appendChild(scrollIndicator)
+
+  const categories = [
+    { id: "vehicles-section", name: "Vozila" },
+    { id: "organizations-section", name: "Organizacije" },
+    { id: "admins-section", name: "Admini" },
+    { id: "commands-section", name: "Komande" },
+    { id: "addons-section", name: "Dodaci" },
+    { id: "join-section", name: "Pridruži se" },
+    { id: "gallery-section", name: "Galerija" },
+  ]
+
+  let currentCategory = ""
+  let indicatorTimeout
+
+  function showIndicator(categoryName) {
+    scrollIndicator.textContent = `Skrolaj do ${categoryName}`
+    scrollIndicator.classList.add("show")
+
+    clearTimeout(indicatorTimeout)
+    indicatorTimeout = setTimeout(() => {
+      scrollIndicator.classList.remove("show")
+    }, 3000)
+  }
+
+  // Intersection Observer for category detection
+  const categoryObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+          const category = categories.find((cat) => cat.id === entry.target.id)
+          if (category && currentCategory !== category.name) {
+            currentCategory = category.name
+            showIndicator(category.name)
+          }
+        }
+      })
+    },
+    {
+      threshold: [0.3],
+      rootMargin: "-20% 0px -20% 0px",
+    },
+  )
+
+  // Observe all category sections
+  categories.forEach((category) => {
+    const element = document.getElementById(category.id)
+    if (element) {
+      categoryObserver.observe(element)
+    }
+  })
+}
+
 function addLoadingAnimations() {
   const observerOptions = {
     threshold: 0.15,
@@ -258,8 +316,14 @@ function addLoadingAnimations() {
     })
   }, observerOptions)
 
+  // Observe donation cards, about cards, and gallery items
   document.querySelectorAll(".donation-card, .about-card, .gallery-item").forEach((el) => {
     el.classList.add("animate-ready")
+    observer.observe(el)
+  })
+
+  // Observe category titles for underline animation
+  document.querySelectorAll(".category-title").forEach((el) => {
     observer.observe(el)
   })
 }
@@ -268,6 +332,7 @@ function addLoadingAnimations() {
 document.addEventListener("DOMContentLoaded", () => {
   populateContent()
   initSmoothScrolling()
+  initScrollIndicators() // Added scroll indicators initialization
 
   setTimeout(addLoadingAnimations, 100)
 
