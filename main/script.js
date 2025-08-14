@@ -3,27 +3,27 @@ const vehicles = [
   {
     name: "BMW M5 F90",
     price: "20€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Brabus 6x6",
     price: "30€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Lamborghini Huracan",
     price: "25€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Tesla Model S",
     price: "15€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Ferrari F8",
     price: "35€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
 ]
 
@@ -31,32 +31,32 @@ const organizations = [
   {
     name: "Vagos",
     price: "50€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Ballas",
     price: "50€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Medelin Cartel",
     price: "60€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Los Santos Police",
     price: "40€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Grove Street",
     price: "45€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Owner",
     price: "1245€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
 ]
 
@@ -64,22 +64,22 @@ const admins = [
   {
     name: "Helper Admin",
     price: "10€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Moderator",
     price: "25€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Admin",
     price: "50€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Super Admin",
     price: "100€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
 ]
 
@@ -87,22 +87,22 @@ const commands = [
   {
     name: "VIP Komande",
     price: "15€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Premium Komande",
     price: "30€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Elite Komande",
     price: "50€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Ultimate Komande",
     price: "75€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
 ]
 
@@ -110,40 +110,40 @@ const addons = [
   {
     name: "Skin Pack",
     price: "5€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Weapon Pack",
     price: "12€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Map Pack",
     price: "20€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
   {
     name: "Complete Pack",
     price: "35€",
-    image: "./public/logo.png",
+    image: "./slike/logo.png",
   },
 ]
 
 const gameImages = [
-  "./public/logo.png",
-  "./public/logo.png",
-  "./public/logo.png",
-  "./public/logo.png",
-  "./public/logo.png",
-  "./public/logo.png",
-  "./public/logo.png",
+  "./slike/logo.png",
+  "./slike/logo.png",
+  "./slike/logo.png",
+  "./slike/logo.png",
+  "./slike/logo.png",
+  "./slike/logo.png",
+  "./slike/logo.png",
 ]
 
 // Function to create donation cards
 function createDonationCard(item, type) {
   return `
         <div class="donation-card">
-            <img src="${item.image}" alt="${item.name}" class="donation-image" loading="lazy" onerror="this.src='./public/logo.png'">
+            <img src="${item.image}" alt="${item.name}" class="donation-image" loading="lazy" onerror="this.src='./slike/logo.png'">
             <h4 class="donation-name">${item.name}</h4>
             <p class="donation-price">Cena: ${item.price}</p>
             <a href="https://discord.com/channels/1384976556748963901/1384976560083308573" 
@@ -160,7 +160,7 @@ function createDonationCard(item, type) {
 function createGalleryItem(image, index) {
   return `
         <div class="gallery-item">
-            <img src="${image}" alt="Fury RolePlay V2 screenshot ${index + 1}" class="gallery-image" loading="lazy" onerror="this.src='./public/logo.png'">
+            <img src="${image}" alt="Fury RolePlay V2 screenshot ${index + 1}" class="gallery-image" loading="lazy" onerror="this.src='./slike/logo.png'">
         </div>
     `
 }
