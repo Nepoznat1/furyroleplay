@@ -613,6 +613,9 @@ body::after {
 
 .member-image {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .member-avatar {
@@ -623,6 +626,8 @@ body::after {
   object-fit: cover;
   transition: all 0.3s ease;
   box-shadow: 8px 8px 16px var(--bg-primary), -8px -8px 16px var(--bg-accent);
+  display: block;
+  background-color: var(--bg-secondary);
 }
 
 .team-member:hover .member-avatar {
