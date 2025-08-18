@@ -29,33 +29,33 @@ const vehicles = [
 
 const organizations = [
   {
-    name: "Vagos",
-    price: "50€",
+    name: "Soon",
+    price: "Soon€",
     image: "./slike/logo.png",
   },
   {
-    name: "Ballas",
-    price: "50€",
+    name: "Soon",
+    price: "Soon€",
     image: "./slike/logo.png",
   },
   {
-    name: "Medelin Cartel",
-    price: "60€",
+    name: "Soon",
+    price: "Soon€",
     image: "./slike/logo.png",
   },
   {
-    name: "Los Santos Police",
-    price: "40€",
+    name: "Soon",
+    price: "Soon€",
     image: "./slike/logo.png",
   },
   {
-    name: "Grove Street",
-    price: "45€",
+    name: "Soon",
+    price: "Soon€",
     image: "./slike/logo.png",
   },
   {
-    name: "Owner",
-    price: "1245€",
+    name: "Soon",
+    price: "Soon€",
     image: "./slike/logo.png",
   },
 ]
