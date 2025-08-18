@@ -1,28 +1,28 @@
 // Data arrays
 const vehicles = [
   {
-    name: "BMW M5 F90",
-    price: "20€",
+    name: "Soon",
+    price: "Soon€",
     image: "./slike/logo.png",
   },
   {
-    name: "Brabus 6x6",
-    price: "30€",
+    name: "Soon",
+    price: "Soon€",
     image: "./slike/logo.png",
   },
   {
-    name: "Lamborghini Huracan",
-    price: "25€",
+    name: "Soon",
+    price: "Soon€",
     image: "./slike/logo.png",
   },
   {
-    name: "Tesla Model S",
-    price: "15€",
+    name: "Soon",
+    price: "Soon€",
     image: "./slike/logo.png",
   },
   {
-    name: "Ferrari F8",
-    price: "35€",
+    name: "Soon",
+    price: "Soon€",
     image: "./slike/logo.png",
   },
 ]
