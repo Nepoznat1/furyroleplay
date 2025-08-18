@@ -152,6 +152,11 @@ const addons = [
     price: "?€",
     image: "./slike/logo.png",
   },
+{
+    name: "Vozilo u org",
+    price: "?€",
+    image: "./slike/logo.png",
+  },
 ]
 
 const gameImages = [
