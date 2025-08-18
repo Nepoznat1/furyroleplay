@@ -62,69 +62,94 @@ const organizations = [
 
 const admins = [
   {
-    name: "Helper Admin",
-    price: "10€",
-    image: "./slike/logo.png",
-  },
-  {
-    name: "Moderator",
-    price: "25€",
+    name: "Pomocnik",
+    price: "?€",
     image: "./slike/logo.png",
   },
   {
     name: "Admin",
-    price: "50€",
+    price: "?€",
+    image: "./slike/logo.png",
+  },
+{
+    name: "Super Admin",
+    price: "?€",
+    image: "./slike/logo.png",
+  },
+{
+    name: "RolePlay Admin",
+    price: "?€",
+    image: "./slike/logo.png",
+  },
+{
+    name: "Head Admin",
+    price: "?€",
+    image: "./slike/logo.png",
+  },
+{
+    name: "Menadzer",
+    price: "?€",
+    image: "./slike/logo.png",
+  },
+{
+    name: "Direktor",
+    price: "?€",
     image: "./slike/logo.png",
   },
   {
-    name: "Super Admin",
-    price: "100€",
+    name: "Vlasnik",
+    price: "?€",
+    image: "./slike/logo.png",
+  },
+  {
+    name: "Osnivac",
+    price: "?€",
     image: "./slike/logo.png",
   },
 ]
 
 const commands = [
   {
-    name: "VIP Komande",
-    price: "15€",
+    name: "/Dajitem",
+    price: "?€",
     image: "./slike/logo.png",
   },
   {
-    name: "Premium Komande",
-    price: "30€",
+    name: "/givecar",
+    price: "?€",
     image: "./slike/logo.png",
   },
   {
-    name: "Elite Komande",
-    price: "50€",
+    name: "SOON",
+    price: "SOON",
     image: "./slike/logo.png",
   },
   {
-    name: "Ultimate Komande",
-    price: "75€",
+    name: "Soon",
+    price: "??€",
     image: "./slike/logo.png",
   },
 ]
 
 const addons = [
   {
-    name: "Skin Pack",
-    price: "5€",
+    name: "10 Fury Coins",
+    price: "?€",
     image: "./slike/logo.png",
   },
   {
-    name: "Weapon Pack",
-    price: "12€",
+    name: "25 Fury Coins",
+    price: "?€",
     image: "./slike/logo.png",
   },
   {
-    name: "Map Pack",
-    price: "20€",
+    name: "50 Fury Coins",
+    price: "?€",
     image: "./slike/logo.png",
   },
   {
-    name: "Complete Pack",
-    price: "35€",
+    name: "100 Fury Coins",
+    price: "?€",
     image: "./slike/logo.png",
   },
 ]
