@@ -71,27 +71,27 @@ const admins = [
     price: "?€",
     image: "./slike/logo.png",
   },
-{
+  {
     name: "Super Admin",
     price: "?€",
     image: "./slike/logo.png",
   },
-{
+  {
     name: "RolePlay Admin",
     price: "?€",
     image: "./slike/logo.png",
   },
-{
+  {
     name: "Head Admin",
     price: "?€",
     image: "./slike/logo.png",
   },
-{
+  {
     name: "Menadzer",
     price: "?€",
     image: "./slike/logo.png",
   },
-{
+  {
     name: "Direktor",
     price: "?€",
     image: "./slike/logo.png",
@@ -152,8 +152,31 @@ const addons = [
     price: "?€",
     image: "./slike/logo.png",
   },
-{
-    name: "Vozilo u org",
+  {
+    name: "Vozilo u Organizaciju",
+    price: "?€",
+    image: "./slike/logo.png",
+  },
+]
+
+const custom = [
+  {
+    name: "Custom Organizacija",
+    price: "?€",
+    image: "./slike/logo.png",
+  },
+  {
+    name: "Custom Auto",
+    price: "?€",
+    image: "./slike/logo.png",
+  },
+  {
+    name: "Custom Ped",
+    price: "?€",
+    image: "./slike/logo.png",
+  },
+  {
+    name: "Custom Tag",
     price: "?€",
     image: "./slike/logo.png",
   },
@@ -225,6 +248,12 @@ function populateContent() {
   const addonsGrid = document.getElementById("addons-grid")
   if (addonsGrid) {
     addonsGrid.innerHTML = addons.map((addon) => createDonationCard(addon, "addon")).join("")
+  }
+
+  // Populate custom
+  const customGrid = document.getElementById("custom-grid")
+  if (customGrid) {
+    customGrid.innerHTML = custom.map((customItem) => createDonationCard(customItem, "custom")).join("")
   }
 
   // Populate gallery
