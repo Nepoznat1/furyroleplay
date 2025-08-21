@@ -115,11 +115,6 @@ const commands = [
     image: "./slike/logo.png",
   },
   {
-    name: "/givecar",
-    price: "?€",
-    image: "./slike/logo.png",
-  },
-  {
     name: "SOON",
     price: "SOON",
     image: "./slike/logo.png",
