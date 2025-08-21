@@ -135,12 +135,12 @@ const addons = [
   {
     name: "Vozilo u Organizaciju",
     price: "20€ / 100FC",
-    image: "./slike/logo.png",
+    image: "./slike/customvozilo.png",
   },
   {
     name: "Custom Vozilo u Organizaciju",
     price: "30-50€ / 150-250FC",
-    image: "./slike/customvozilo.png",
+    image: "./slike/customvozilo1.png",
   },
 ]
 
