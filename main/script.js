@@ -31,27 +31,27 @@ const organizations = [
   {
     name: "Casino",
     price: "Soon€",
-    image: "./slike/logo.png",
+    image: "./slike/casino.png",
   },
   {
     name: "Narcos",
     price: "Soon€",
-    image: "./slike/logo.png",
+    image: "./slike/narcos.png",
   },
   {
     name: "La casa del papel",
     price: "Soon€",
-    image: "./slike/logo.png",
+    image: "./slike/la_casa_del_papel.png",
   },
   {
     name: "Auto Mafija",
     price: "Soon€",
-    image: "./slike/logo.png",
+    image: "./slike/automafija.png",
   },
   {
     name: "Camorra",
     price: "Soon€",
-    image: "./slike/logo.png",
+    image: "./slike/camorra.png",
   },
 ]
 
