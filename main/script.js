@@ -148,7 +148,7 @@ const custom = [
   {
     name: "Custom Organizacija",
     price: "70€ / 350FC",
-    image: "./slike/logo.png",
+    image: "./slike/customorg.jpg",
   },
   {
     name: "Custom Auto",
