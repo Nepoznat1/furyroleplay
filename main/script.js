@@ -139,7 +139,12 @@ const addons = [
   },
   {
     name: "Vozilo u Organizaciju",
-    price: "?€",
+    price: "20€ / 100FC",
+    image: "./slike/logo.png",
+  },
+  {
+    name: "Custom Vozilo u Organizaciju",
+    price: "30-50€ / 150-250FC",
     image: "./slike/logo.png",
   },
 ]
@@ -147,22 +152,22 @@ const addons = [
 const custom = [
   {
     name: "Custom Organizacija",
-    price: "?€",
+    price: "70€ / 350FC",
     image: "./slike/logo.png",
   },
   {
     name: "Custom Auto",
-    price: "?€",
+    price: "40€ / 200FC",
     image: "./slike/logo.png",
   },
   {
     name: "Custom Ped",
-    price: "?€",
+    price: "15€ / 75FC",
     image: "./slike/logo.png",
   },
   {
     name: "Custom Tag",
-    price: "?€",
+    price: "20€ / 100FC",
     image: "./slike/logo.png",
   },
 ]
