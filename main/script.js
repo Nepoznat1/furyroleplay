@@ -59,32 +59,32 @@ const admins = [
   {
     name: "Super Admin",
     price: "10€ / 50FC",
-    image: "./slike/logo.png",
+    image: "./slike/superadmin.png",
   },
   {
     name: "RolePlay Admin",
     price: "15€ / 75FC",
-    image: "./slike/logo.png",
+    image: "./slike/roleplayadmin.png",
   },
   {
     name: "Head Admin",
     price: "25€ / 125FC",
-    image: "./slike/logo.png",
+    image: "./slike/headadmin.png",
   },
   {
     name: "Menadzer",
     price: "35€ / 175FC",
-    image: "./slike/logo.png",
+    image: "./slike/menadzer.png",
   },
   {
     name: "Direktor",
     price: "70€ / 350FC",
-    image: "./slike/logo.png",
+    image: "./slike/direktor.png",
   },
   {
     name: "Vlasnik",
     price: "120€ / 600FC",
-    image: "./slike/logo.png",
+    image: "./slike/vlasnik.png",
   },
 ]
 
