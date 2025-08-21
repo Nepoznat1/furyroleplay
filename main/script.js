@@ -158,7 +158,7 @@ const custom = [
   {
     name: "Custom Ped",
     price: "15€ / 75FC",
-    image: "./slike/logo.png",
+    image: "./slike/customped.jpg",
   },
   {
     name: "Custom Tag",
