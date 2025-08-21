@@ -133,6 +133,11 @@ const commands = [
 
 const addons = [
   {
+    name: "5 Fury Coins",
+    price: "?€",
+    image: "./slike/logo.png",
+  },
+{
     name: "10 Fury Coins",
     price: "?€",
     image: "./slike/logo.png",
