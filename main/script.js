@@ -62,16 +62,6 @@ const organizations = [
 
 const admins = [
   {
-    name: "Pomocnik",
-    price: "?€",
-    image: "./slike/logo.png",
-  },
-  {
-    name: "Admin",
-    price: "?€",
-    image: "./slike/logo.png",
-  },
-  {
     name: "Super Admin",
     price: "?€",
     image: "./slike/logo.png",
@@ -98,12 +88,7 @@ const admins = [
   },
   {
     name: "Vlasnik",
-    price: "?€",
-    image: "./slike/logo.png",
-  },
-  {
-    name: "Osnivac",
-    price: "?€",
+    price: "120€ / 600FC",
     image: "./slike/logo.png",
   },
 ]
@@ -129,27 +114,27 @@ const commands = [
 const addons = [
   {
     name: "5 Fury Coins",
-    price: "?€",
+    price: "1€",
     image: "./slike/logo.png",
   },
 {
     name: "10 Fury Coins",
-    price: "?€",
+    price: "2€",
     image: "./slike/logo.png",
   },
   {
     name: "25 Fury Coins",
-    price: "?€",
+    price: "5€",
     image: "./slike/logo.png",
   },
   {
     name: "50 Fury Coins",
-    price: "?€",
+    price: "10€",
     image: "./slike/logo.png",
   },
   {
     name: "100 Fury Coins",
-    price: "?€",
+    price: "20€",
     image: "./slike/logo.png",
   },
   {
