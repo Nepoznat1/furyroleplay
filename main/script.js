@@ -163,7 +163,7 @@ const custom = [
   {
     name: "Custom Tag",
     price: "20€ / 100FC",
-    image: "./slike/logo.png",
+    image: "./slike/custamtag.jpg",
   },
 ]
 
