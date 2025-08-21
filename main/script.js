@@ -153,7 +153,7 @@ const custom = [
   {
     name: "Custom Auto",
     price: "40€ / 200FC",
-    image: "./slike/logo.png",
+    image: "./slike/customa.jpg",
   },
   {
     name: "Custom Ped",
